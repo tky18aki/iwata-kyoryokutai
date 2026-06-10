@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>空き家バンク｜磐田市 地域おこし協力隊</title>
+  <meta name="description" content="磐田市の空き家バンク登録物件を見やすく整理して掲載しています。エリア・カテゴリ・価格帯で絞り込めます。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .area-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .area-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 16px 8px;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--gray-300);
+      background: var(--white);
+      cursor: pointer;
+      transition: all var(--transition);
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--gray-700);
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+    .area-btn .area-icon { font-size: 1.6rem; }
+    .area-btn:hover, .area-btn.active {
+      border-color: var(--blue);
+      background: var(--blue-light);
+      color: var(--blue-dark);
+    }
+    .area-btn.active { box-shadow: 0 0 0 3px rgba(91,155,213,.2); }
+
+    .search-box {
+      background: var(--gray-50);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      margin-bottom: 40px;
+      border: 1px solid var(--gray-100);
+    }
+    .search-section-title {
+      font-size: .75rem;
+      font-weight: 700;
+      color: var(--gray-500);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .search-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 20px 0;
+      color: var(--gray-500);
+      font-size: .8rem;
+    }
+    .search-divider::before,
+    .search-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--gray-300);
+    }
+
+    .sort-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .result-info { font-size: .9rem; color: var(--gray-500); }
+    .result-info strong { color: var(--gray-900); font-size: 1.1rem; }
+    .sort-select {
+      padding: 8px 14px;
+      border: 1.5px solid var(--gray-300);
+      border-radius: 100px;
+      font-size: .85rem;
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--gray-700);
+      background: var(--white);
+      cursor: pointer;
+      outline: none;
+      appearance: none;
+      padding-right: 28px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23868E96' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+    }
+
+    .props-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .prop-detail-link {
+      display: block;
+      margin-top: 12px;
+      padding: 8px;
+      border-radius: var(--radius-sm);
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      font-size: .8rem;
+      font-weight: 600;
+      text-align: center;
+      transition: background var(--transition);
+    }
+    .prop-detail-link:hover { background: var(--blue); color: var(--white); }
+
+    .sold-overlay {
+      position: relative;
+    }
+    .sold-overlay::after {
+      content: '成約済';
+      position: absolute;
+      top: 12px; right: 12px;
+      background: rgba(192,57,43,.9);
+      color: #fff;
+      font-size: .75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+
+    .notice-box {
+      background: var(--blue-light);
+      border-left: 4px solid var(--blue);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 14px 18px;
+      font-size: .875rem;
+      color: var(--blue-dark);
+      margin-bottom: 28px;
+      line-height: 1.7;
+    }
+
+    .no-results {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--gray-500);
+    }
+    .no-results .icon { font-size: 3rem; margin-bottom: 12px; }
+
+    @media (max-width: 900px) {
+      .area-grid { grid-template-columns: repeat(3, 1fr); }
+      .props-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .area-grid { grid-template-columns: repeat(3, 1fr); }
+      .props-grid { grid-template-columns: 1fr; }
+      .search-box { padding: 18px; }
+      .area-btn { padding: 12px 6px; font-size: .75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header class="site-header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">
+        磐田市 地域おこし協力隊
+        <span>Iwata City Regional Cooperation</span>
+      </a>
+      <nav class="nav-links">
+        <a href="about.html">協力隊とは</a>
+        <a href="members.html">隊員紹介</a>
+        <a href="iju.html">移住情報</a>
+        <a href="akiya-bank.html" style="color:var(--blue);font-weight:700;">空き家バンク</a>
+        <a href="matching.html">マッチング</a>
+        <a href="faq.html">FAQ</a>
+        <a href="consult.html" class="nav-cta">移住相談</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="about.html">協力隊とは</a>
+    <a href="members.html">隊員紹介</a>
+    <a href="iju.html">移住情報</a>
+    <a href="akiya-bank.html">空き家バンク</a>
+    <a href="matching.html">マッチング</a>
+    <a href="faq.html">FAQ</a>
+    <a href="consult.html" class="nav-cta">移住相談はこちら</a>
+  </nav>
+
+  <main>
+
+    <!-- ページヒーロー -->
+    <div class="page-hero">
+      <div class="container">
+        <div class="breadcrumb" style="padding-top:0; margin-bottom:16px;">
+          <a href="index.html">HOME</a>
+          <span>›</span>
+          <span>空き家バンク</span>
+        </div>
+        <h1>空き家バンク</h1>
+        <p>磐田市の空き家バンク登録物件を見やすく整理して掲載しています</p>
+      </div>
+    </div>
+
+    <section class="section" style="padding-top:40px;">
+      <div class="container">
+
+        <div class="notice-box">
+          このページは<strong>磐田市空き家バンク</strong>の情報をもとに協力隊が見やすく整理したものです。物件の詳細・契約は各不動産会社へ直接お問い合わせください。
+          <a href="https://www.city.iwata.shizuoka.jp/kurashi_tetsuzuki/juutaku_pet_seikatsu/1010112/1009122/index.html" target="_blank" style="color:var(--blue-dark);font-weight:600;text-decoration:underline;">市の公式ページはこちら →</a>
+        </div>
+
+        <!-- 検索ボックス -->
+        <div class="search-box fade-up">
+
+          <!-- エリアから探す -->
+          <div class="search-section-title">エリアから探す</div>
+          <div class="area-grid" id="areaGrid">
+            <button class="area-btn active" data-area="all">
+              <span class="area-icon">🗺️</span>すべて
+            </button>
+            <button class="area-btn" data-area="toyooka">
+              <span class="area-icon">🌾</span>豊岡
+            </button>
+            <button class="area-btn" data-area="toyota">
+              <span class="area-icon">🌿</span>豊田
+            </button>
+            <button class="area-btn" data-area="iwata">
+              <span class="area-icon">🏙️</span>磐田
+            </button>
+            <button class="area-btn" data-area="ryuyo">
+              <span class="area-icon">🌊</span>竜洋
+            </button>
+            <button class="area-btn" data-area="fukuda">
+              <span class="area-icon">⛵</span>福田
+            </button>
+          </div>
+
+          <div class="search-divider">カテゴリから絞り込む</div>
+
+          <!-- カテゴリから探す -->
+          <div class="search-section-title">カテゴリ・条件</div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;" id="categoryChips">
+            <button class="chip active" data-cat="all">すべて</button>
+            <button class="chip" data-cat="sale">売買</button>
+            <button class="chip" data-cat="rent">賃貸</button>
+            <button class="chip" data-cat="kominka">古民家</button>
+            <button class="chip" data-cat="hiraya">平屋</button>
+            <button class="chip" data-cat="parking">駐車場あり</button>
+            <button class="chip" data-cat="reform">リフォーム済</button>
+          </div>
+
+          <!-- 価格帯 -->
+          <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+            <div class="search-section-title" style="margin:0;">価格帯</div>
+            <select class="sort-select" id="priceFilter" style="border-radius:var(--radius-sm);">
+              <option value="all">指定なし</option>
+              <option value="0-500">〜500万円</option>
+              <option value="500-1000">500〜1,000万円</option>
+              <option value="1000-1500">1,000〜1,500万円</option>
+              <option value="1500-2000">1,500〜2,000万円</option>
+              <option value="2000-">2,000万円以上</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- ソートバー -->
+        <div class="sort-bar fade-up">
+          <div class="result-info">
+            <strong id="resultCount">8</strong> 件の物件
+          </div>
+          <select class="sort-select" id="sortSelect">
+            <option value="default">並び替え：標準</option>
+            <option value="price-asc">価格が安い順</option>
+            <option value="price-desc">価格が高い順</option>
+            <option value="new">新着順</option>
+          </select>
+        </div>
+
+        <!-- 物件一覧 -->
+        <div class="props-grid" id="propsGrid">
+
+          <!-- 物件1 -->
+          <div class="card prop-card fade-up"
+            data-area="iwata"
+            data-cat="sale kominka"
+            data-price="1330"
+            data-sort-date="20260520">
+            <div class="card-img-placeholder">物件写真</div>
+            <div class="card-body">
+              <div class="prop-tags">
+                <span class="tag">売買</span>
+                <span class="tag-green tag">磐田</span>
+                <span class="tag">古民家</span>
+              </div>
+              <div class="prop-title">磐田市内　古民家戸建て</div>
+              <div class="prop-price">133万円<small>（税込）</small></div>
+              <div class="prop-specs">
+                <div class="prop-spec">問合せ <strong>富士ヶ丘サービス</strong></div>
+                <div class="prop-spec">電話 <strong>0538-31-3308</strong></div>
+              </div>
+              <a href="https://www.city.iwata.shizuoka.jp/kurashi_tetsuzuki/juutaku_pet_seikatsu/1010112/1009122/index.html"
+                target="_blank" class="prop-detail-link">市の空き家バンクで詳細を見る →</a>
+            </div>
+          </div>
+
+          <!-- 物件2 -->
+          <div class="card prop-card fade-up"
+            data-area="iwata"
+            data-cat="sale"
+            data-price="1690"
+            data-sort-date="20260515">
+            <div class="card-img-placeholder">物件写真</div>
+            <div class="card-body">
+              <div class="prop-tags">
+                <span class="tag">売買</span>
+                <span class="tag-green tag">磐田</span>
+              </div>
+              <div class="prop-title">磐田市内　中古戸建住宅</div>
+              <div class="prop-price">1,690万円<small>（税込）</small></div>
+              <div class="prop-specs">
+                <div class="prop-spec">問合せ <strong>富士ヶ丘サービス</strong></div>
+                <div class="prop-spec">電話 <strong>0538-31-3308</strong></div>
+              </div>
+              <a href="https://www.city.iwata.shizuoka.jp/kurashi_tetsuzuki/juutaku_pet_seikatsu/1010112/1009122/index.html"
+                target="_blank" class="prop-detail-link">市の空き家バンクで詳細を見る →</a>
+            </div>
+          </div>
+
+          <!-- 物件3 -->
+          <div class="card prop-card fade-up"
+            data-area="iwata"
+            data-cat="sale"
+            data-price="1470"
+            data-sort-date="20260510">
+            <div class="card-img-placeholder">物件写真</div>
+            <div class="card-body">
+              <div class="prop-tags">
+                <span class="tag">売買</span>
+                <span class="tag-green tag">磐田</span>
+              </div>
+              <div class="prop-title">磐田市内　戸建て住宅</div>
+              <div class="prop-price">1,470万円<small>（税込）</small></div>
+              <div class="prop-specs">
+                <div class="prop-spec">問合せ <strong>富士ヶ丘サービス</strong></div>
+                <div class="prop-spec">電話 <strong>0538-31-3308</strong></div>
+              </div>
+              <a href="https://www.city.iwata.shizuoka.jp/kurashi_tetsuzuki/juutaku_pet_seikatsu/1010112/1009122/index.html"
+                target="_blank" class="prop-detail-link">市の空き家バンクで詳細を見る →</a>
+            </div>
+          </div>
+
+          <!-- 物件4 -->
+          <div class="card prop-card fade-up"
+            data-area="iwata"
+            data-cat="sale"
+            data-price="1899"
+            data-sort-date="20260505">
+            <div class="card-img-placeholder">物件写真</div>
+            <div class="card-body">
+              <div class="prop-tags">
+                <span class="tag">売買</span>
+                <span class="tag-green tag">磐田</span>
+              </div>
+              <div class="prop-title">磐田市今之浦　中古戸建て</div>
+              <div class="prop-price">1,899万円<small>（税込）</small></div>
+              <div class="prop-specs">
+                <div class="prop-spec">問合せ <strong>カチタス磐田店</strong></div>
+                <div class="prop-spec">電話 <strong>0538-21-4810</strong></div>
+              </div>
+              <a href="https://www.city.iwata.shizuoka.jp/kurashi_tetsuzuki/juutaku_pet_seikatsu/1010112/1009122/index.html"
+                target="_blank" class="prop-detail-link">市の空き家バンクで詳細を見る →</a>
+            </div>
+          </div>
+
+          <!-- 物件5（ダミー：豊岡） -->
+          <div class="card prop-card fade-up"
+            data-area="toyooka"
+            data-cat="sale kominka hiraya"
+            data-price="850"
+            data-sort-date="20260501">
+            <div class="card-img-placeholder">物件写真</div>
+            <div class="card-body">
+              <div class="prop-tags">
+                <span class="tag">売買</span>
+                <span class="tag-green tag">豊岡</span>
+                <span class="tag">古民家</span>
+                <span class="tag">平屋</span>
+              </div>
+              <div class="prop-title">豊岡地区　平屋古民家</div>
+              <div class="prop-price">850万円<small>（税込）</small></div>
+              <div class="prop-specs">
+                <div class="prop-spec">問合せ <strong>富士ヶ丘サービス</strong></div>
+                <div class="prop-spec">電話 <strong>0538-31-3308</strong></div>
+              </div>
+              <a href="https://www.city.iwata.shizuoka.jp/kurashi_tetsuzuki/juutaku_pet_seikatsu/1010112/1009122/index.html"
+                target="_blank" class="prop-detail-link">市の空き家バンクで詳細を見る →</a>
+            </div>
+          </div>
+
+          <!-- 物件6（ダミー：豊田） -->
+          <div class="card prop-card fade-up"
+            data-area="toyota"
+            data-cat="sale parking reform"
+            data-price="1200"
+            data-sort-date="20260428">
+            <div class="card-img-placeholder">物件写真</div>
+            <div class="card-body">
+              <div class="prop-tags">
+                <span class="tag">売買</span>
+                <span class="tag-green tag">豊田</span>
+                <span class="tag">駐車場あり</span>
+                <span class="tag">リフォーム済</span>
+              </div>
+              <div class="prop-title">豊田地区　リフォーム済み戸建て</div>
+              <div class="prop-price">1,200万円<small>（税込）</small></div>
+              <div class="prop-specs">
+                <div class="prop-spec">問合せ <strong>富士ヶ丘サービス</strong></div>
+                <div class="prop-spec">電話 <strong>0538-31-3308</strong></div>
+              </div>
+              <a href="https://www.city.iwata.shizuoka.jp/kurashi_tetsuzuki/juutaku_pet_seikatsu/1010112/1009122/index.html"
+                target="_blank" class="prop-detail-link">市の空き家バンクで詳細を見る →</a>
+            </div>
+          </div>
+
+          <!-- 物件7（ダミー：竜洋） -->
+          <div class="card prop-card fade-up"
+            data-area="ryuyo"
+            data-cat="rent parking"
+            data-price="45"
+            data-sort-date="20260420">
+            <div class="card-img-placeholder">物件写真</div>
+            <div class="card-body">
+              <div class="prop-tags">
+                <span class="tag">賃貸</span>
+                <span class="tag-green tag">竜洋</span>
+                <span class="tag">駐車場あり</span>
+              </div>
+              <div class="prop-title">竜洋地区　一戸建て</div>
+              <div class="prop-price">4.5万円<small>/月</small></div>
+              <div class="prop-specs">
+                <div class="prop-spec">問合せ <strong>富士ヶ丘サービス</strong></div>
+                <div class="prop-spec">電話 <strong>0538-31-3308</strong></div>
+              </div>
+              <a href="https://www.city.iwata.shizuoka.jp/kurashi_tetsuzuki/juutaku_pet_seikatsu/1010112/1009122/index.html"
+                target="_blank" class="prop-detail-link">市の空き家バンクで詳細を見る →</a>
+            </div>
+          </div>
+
+          <!-- 物件8（ダミー：福田） -->
+          <div class="card prop-card fade-up"
+            data-area="fukuda"
+            data-cat="sale kominka parking"
+            data-price="980"
+            data-sort-date="20260415">
+            <div class="card-img-placeholder">物件写真</div>
+            <div class="card-body">
+              <div class="prop-tags">
+                <span class="tag">売買</span>
+                <span class="tag-green tag">福田</span>
+                <span class="tag">古民家</span>
+                <span class="tag">駐車場あり</span>
+              </div>
+              <div class="prop-title">福田地区　古民家戸建て</div>
+              <div class="prop-price">980万円<small>（税込）</small></div>
+              <div class="prop-specs">
+                <div class="prop-spec">問合せ <strong>富士ヶ丘サービス</strong></div>
+                <div class="prop-spec">電話 <strong>0538-31-3308</strong></div>
+              </div>
+              <a href="https://www.city.iwata.shizuoka.jp/kurashi_tetsuzuki/juutaku_pet_seikatsu/1010112/1009122/index.html"
+                target="_blank" class="prop-detail-link">市の空き家バンクで詳細を見る →</a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 結果なし表示（JS制御） -->
+        <div id="noResults" style="display:none;" class="no-results">
+          <div class="icon">🏚️</div>
+          <p>条件に合う物件が見つかりませんでした。<br>絞り込み条件を変えてみてください。</p>
+        </div>
+
+        <!-- 相談CTA -->
+        <div style="text-align:center; margin-top:56px; padding:40px; background:var(--blue-light); border-radius:var(--radius-lg);" class="fade-up">
+          <h3 style="margin-bottom:10px;">気になる物件がありましたか？</h3>
+          <p style="margin-bottom:24px; color:var(--gray-700);">移住コーディネーターが物件見学や手続きをサポートします。お気軽にご相談ください。</p>
+          <a href="consult.html" class="btn btn-primary">移住相談フォームへ</a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- フッター -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo">磐田市 地域おこし協力隊</div>
+          <p class="footer-desc">移住・定住促進と空き家活用を通じて、磐田市の地域活性化に取り組んでいます。</p>
+        </div>
+        <div>
+          <div class="footer-heading">ページ一覧</div>
+          <ul class="footer-links">
+            <li><a href="about.html">地域おこし協力隊とは</a></li>
+            <li><a href="members.html">隊員紹介</a></li>
+            <li><a href="iju.html">移住情報</a></li>
+            <li><a href="akiya-bank.html">空き家バンク</a></li>
+            <li><a href="matching.html">空き家マッチング</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">相談・お問い合わせ</div>
+          <ul class="footer-links">
+            <li><a href="consult.html">移住相談フォーム</a></li>
+            <li><a href="faq.html">よくある質問</a></li>
+            <li><a href="events.html">イベント・お知らせ</a></li>
+            <li><a href="voices.html">移住者の声</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 磐田市 地域おこし協力隊. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ヘッダースクロール
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    // ハンバーガー
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+    });
+    mobileNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileNav.classList.remove('open');
+      });
+    });
+
+    // フェードアップ
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80);
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // --- 絞り込み・並び替えロジック ---
+    let currentArea = 'all';
+    let currentCat  = 'all';
+    let currentPrice = 'all';
+    let currentSort  = 'default';
+
+    const allCards = Array.from(document.querySelectorAll('#propsGrid .card'));
+
+    // エリアボタン
+    document.querySelectorAll('.area-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.area-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentArea = btn.dataset.area;
+        applyFilters();
+      });
+    });
+
+    // カテゴリチップ
+    document.querySelectorAll('#categoryChips .chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('#categoryChips .chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        currentCat = chip.dataset.cat;
+        applyFilters();
+      });
+    });
+
+    // 価格帯
+    document.getElementById('priceFilter').addEventListener('change', function() {
+      currentPrice = this.value;
+      applyFilters();
+    });
+
+    // 並び替え
+    document.getElementById('sortSelect').addEventListener('change', function() {
+      currentSort = this.value;
+      applyFilters();
+    });
+
+    function applyFilters() {
+      const grid = document.getElementById('propsGrid');
+
+      // フィルタリング
+      let visible = allCards.filter(card => {
+        const area = card.dataset.area;
+        const cats = card.dataset.cat.split(' ');
+        const price = parseInt(card.dataset.price);
+
+        if (currentArea !== 'all' && area !== currentArea) return false;
+        if (currentCat !== 'all' && !cats.includes(currentCat)) return false;
+
+        if (currentPrice !== 'all') {
+          const [min, max] = currentPrice.split('-').map(v => v === '' ? Infinity : parseInt(v));
+          if (price < min || price > (max || Infinity)) return false;
+        }
+
+        return true;
+      });
+
+      // 並び替え
+      if (currentSort === 'price-asc') {
+        visible.sort((a, b) => parseInt(a.dataset.price) - parseInt(b.dataset.price));
+      } else if (currentSort === 'price-desc') {
+        visible.sort((a, b) => parseInt(b.dataset.price) - parseInt(a.dataset.price));
+      } else if (currentSort === 'new') {
+        visible.sort((a, b) => parseInt(b.dataset.sortDate) - parseInt(a.dataset.sortDate));
+      }
+
+      // 表示更新
+      allCards.forEach(c => c.style.display = 'none');
+      visible.forEach(c => {
+        c.style.display = '';
+        grid.appendChild(c);
+      });
+
+      document.getElementById('resultCount').textContent = visible.length;
+      document.getElementById('noResults').style.display = visible.length === 0 ? 'block' : 'none';
+    }
+  </script>
+
+</body>
+</html>
