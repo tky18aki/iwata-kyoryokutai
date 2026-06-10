@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>磐田市 地域おこし協力隊</title>
+  <meta name="description" content="磐田市の地域おこし協力隊が移住・空き家活用をサポートします。移住相談・空き家バンク・マッチングのご相談はこちら。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header class="site-header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">
+        磐田市 地域おこし協力隊
+        <span>Iwata City Regional Cooperation</span>
+      </a>
+      <nav class="nav-links">
+        <a href="about.html">協力隊とは</a>
+        <a href="members.html">隊員紹介</a>
+        <a href="iju.html">移住情報</a>
+        <a href="akiya-bank.html">空き家バンク</a>
+        <a href="matching.html">マッチング</a>
+        <a href="faq.html">FAQ</a>
+        <a href="consult.html" class="nav-cta">移住相談</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- モバイルナビ -->
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="about.html">協力隊とは</a>
+    <a href="members.html">隊員紹介</a>
+    <a href="iju.html">移住情報</a>
+    <a href="akiya-bank.html">空き家バンク</a>
+    <a href="matching.html">マッチング</a>
+    <a href="faq.html">FAQ</a>
+    <a href="consult.html" class="nav-cta">移住相談はこちら</a>
+  </nav>
+
+  <main>
+
+    <!-- ヒーローセクション -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="container hero-content">
+        <div class="hero-eyebrow">磐田市 地域おこし協力隊</div>
+        <h1 class="hero-title fade-up">
+          磐田で、<em>新しい暮らし</em>を<br>はじめませんか。
+        </h1>
+        <p class="hero-desc fade-up">
+          地域おこし協力隊が、移住・定住から空き家の活用まで、あなたの磐田ライフをトータルサポートします。
+        </p>
+        <div class="hero-btns fade-up">
+          <a href="consult.html" class="btn btn-primary">移住を検討している方</a>
+          <a href="matching.html" class="btn btn-secondary">空き家でお困りの方</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 空き家バンク新着物件 -->
+    <section class="section" style="background: var(--gray-50);">
+      <div class="container">
+        <h2 class="section-title fade-up">空き家バンク 新着物件</h2>
+        <p class="section-sub fade-up">磐田市の空き家バンク情報を見やすく整理しています</p>
+        <div class="grid-3">
+
+          <div class="card prop-card fade-up" onclick="location.href='akiya-bank.html'">
+            <div class="card-img-placeholder">物件写真</div>
+            <div class="card-body">
+              <div class="prop-tags">
+                <span class="tag">売買</span>
+                <span class="tag-green tag">掛塚地区</span>
+                <span class="tag">古民家</span>
+              </div>
+              <div class="prop-title">掛塚　平屋戸建て</div>
+              <div class="prop-price">1,330万円<small>（税込）</small></div>
+              <div class="prop-specs">
+                <div class="prop-spec">間取り <strong>5DK</strong></div>
+                <div class="prop-spec">築年 <strong>1984年</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card prop-card fade-up" onclick="location.href='akiya-bank.html'">
+            <div class="card-img-placeholder">物件写真</div>
+            <div class="card-body">
+              <div class="prop-tags">
+                <span class="tag">売買</span>
+                <span class="tag-green tag">見付地区</span>
+              </div>
+              <div class="prop-title">見付　中古戸建住宅</div>
+              <div class="prop-price">1,690万円<small>（税込）</small></div>
+              <div class="prop-specs">
+                <div class="prop-spec">間取り <strong>4LDK</strong></div>
+                <div class="prop-spec">築年 <strong>昭和63年</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card prop-card fade-up" onclick="location.href='akiya-bank.html'">
+            <div class="card-img-placeholder">物件写真</div>
+            <div class="card-body">
+              <div class="prop-tags">
+                <span class="tag">賃貸</span>
+                <span class="tag-green tag">豊田地区</span>
+              </div>
+              <div class="prop-title">豊田　一戸建て</div>
+              <div class="prop-price">4.5万円<small>/月</small></div>
+              <div class="prop-specs">
+                <div class="prop-spec">間取り <strong>3LDK</strong></div>
+                <div class="prop-spec">駐車場 <strong>2台</strong></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div style="text-align:center; margin-top:36px;">
+          <a href="akiya-bank.html" class="btn btn-secondary fade-up">物件一覧をすべて見る</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 協力隊ができること -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title fade-up">協力隊ができること</h2>
+        <p class="section-sub fade-up">移住・定住から空き家活用まで、3つの柱でサポートします</p>
+        <div class="grid-3">
+
+          <div class="card fade-up">
+            <div class="card-body" style="padding: 32px 24px; text-align: center;">
+              <div style="font-size:2.5rem; margin-bottom:16px;">🏡</div>
+              <h3 style="margin-bottom:10px;">移住コーディネート</h3>
+              <p>物件探しから転入手続き・生活情報の提供まで、移住のステップをトータルサポート。</p>
+              <div style="margin-top:20px;">
+                <a href="iju.html" class="btn btn-secondary" style="padding:8px 20px; font-size:.85rem;">移住情報を見る</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card fade-up">
+            <div class="card-body" style="padding: 32px 24px; text-align: center;">
+              <div style="font-size:2.5rem; margin-bottom:16px;">🏚️</div>
+              <h3 style="margin-bottom:10px;">空き家マッチング</h3>
+              <p>空き家オーナーと活用希望者をつなぎます。相談から現地見学・交渉サポートまで無料で対応。</p>
+              <div style="margin-top:20px;">
+                <a href="matching.html" class="btn btn-secondary" style="padding:8px 20px; font-size:.85rem;">マッチングを見る</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card fade-up">
+            <div class="card-body" style="padding: 32px 24px; text-align: center;">
+              <div style="font-size:2.5rem; margin-bottom:16px;">🌱</div>
+              <h3 style="margin-bottom:10px;">地域づくり活動</h3>
+              <p>イベント企画・ワークショップ・地域の魅力発信など、まちを元気にする活動を展開中。</p>
+              <div style="margin-top:20px;">
+                <a href="events.html" class="btn btn-secondary" style="padding:8px 20px; font-size:.85rem;">イベントを見る</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 移住者の声 -->
+    <section class="section" style="background: var(--blue-light);">
+      <div class="container">
+        <h2 class="section-title fade-up">移住者の声</h2>
+        <p class="section-sub fade-up">実際に磐田市に移住した方のリアルな声</p>
+        <div class="grid-2">
+
+          <div class="card fade-up">
+            <div class="card-body" style="padding: 28px;">
+              <div style="display:flex; gap:16px; align-items:center; margin-bottom:16px;">
+                <div class="member-avatar-placeholder" style="width:56px;height:56px;font-size:1.2rem;flex-shrink:0;">K</div>
+                <div>
+                  <div style="font-weight:700;">Kさん（30代・夫婦）</div>
+                  <div style="font-size:.85rem; color:var(--gray-500);">東京 → 磐田市掛塚地区　2023年移住</div>
+                </div>
+              </div>
+              <p style="font-size:.95rem; line-height:1.8;">縁側のある古民家に住みたくて移住を決意しました。協力隊の方が物件探しから手続きまで全部サポートしてくれて、今は畑もはじめて充実した毎日を送っています。</p>
+            </div>
+          </div>
+
+          <div class="card fade-up">
+            <div class="card-body" style="padding: 28px;">
+              <div style="display:flex; gap:16px; align-items:center; margin-bottom:16px;">
+                <div class="member-avatar-placeholder" style="width:56px;height:56px;font-size:1.2rem;flex-shrink:0;">T</div>
+                <div>
+                  <div style="font-weight:700;">Tさん（40代・家族3人）</div>
+                  <div style="font-size:.85rem; color:var(--gray-500);">名古屋 → 磐田市　2024年移住</div>
+                </div>
+              </div>
+              <p style="font-size:.95rem; line-height:1.8;">子どもの学校環境を重視して選びました。自然が多くて子育てしやすく、近所の方もとても温かい。東名を使えば名古屋まで1時間半なので、週末に戻ることもできます。</p>
+            </div>
+          </div>
+
+        </div>
+        <div style="text-align:center; margin-top:36px;">
+          <a href="voices.html" class="btn btn-primary fade-up">移住者の声をもっと見る</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- お知らせ・イベント -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title fade-up">お知らせ・イベント</h2>
+        <p class="section-sub fade-up">協力隊からの最新情報</p>
+        <div style="max-width:720px; margin:0 auto;">
+
+          <div class="card fade-up" style="margin-bottom:12px;">
+            <div class="card-body" style="display:flex; gap:16px; align-items:center;">
+              <div style="flex-shrink:0; text-align:center;">
+                <div style="font-size:.75rem; color:var(--gray-500);">2026</div>
+                <div style="font-size:1.5rem; font-weight:700; color:var(--blue);">06.15</div>
+              </div>
+              <div>
+                <span class="tag" style="margin-bottom:6px; display:inline-block;">イベント</span>
+                <div style="font-weight:700;">移住相談会　6月開催</div>
+                <div style="font-size:.85rem; color:var(--gray-500);">磐田市役所 多目的ホール｜事前予約制</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card fade-up" style="margin-bottom:12px;">
+            <div class="card-body" style="display:flex; gap:16px; align-items:center;">
+              <div style="flex-shrink:0; text-align:center;">
+                <div style="font-size:.75rem; color:var(--gray-500);">2026</div>
+                <div style="font-size:1.5rem; font-weight:700; color:var(--blue);">05.30</div>
+              </div>
+              <div>
+                <span class="tag-green tag" style="margin-bottom:6px; display:inline-block;">お知らせ</span>
+                <div style="font-weight:700;">空き家バンクに新着物件が追加されました</div>
+                <div style="font-size:.85rem; color:var(--gray-500);">掛塚地区・古民家 5DK</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card fade-up">
+            <div class="card-body" style="display:flex; gap:16px; align-items:center;">
+              <div style="flex-shrink:0; text-align:center;">
+                <div style="font-size:.75rem; color:var(--gray-500);">2026</div>
+                <div style="font-size:1.5rem; font-weight:700; color:var(--blue);">05.20</div>
+              </div>
+              <div>
+                <span class="tag-gray tag" style="margin-bottom:6px; display:inline-block;">メディア</span>
+                <div style="font-weight:700;">静岡新聞に協力隊の活動が掲載されました</div>
+                <div style="font-size:.85rem; color:var(--gray-500);">2026年5月20日付 朝刊</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div style="text-align:center; margin-top:32px;">
+          <a href="events.html" class="btn btn-secondary fade-up">お知らせをすべて見る</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 相談CTA -->
+    <section class="section" style="background: var(--gray-900); color: var(--white);">
+      <div class="container" style="text-align:center;">
+        <h2 class="fade-up" style="color:var(--white); margin-bottom:16px;">まずは気軽にご相談ください</h2>
+        <p class="fade-up" style="color:var(--gray-300); max-width:480px; margin:0 auto 36px;">移住コーディネーターが丁寧にご対応します。お問い合わせはすべて無料です。</p>
+        <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;" class="fade-up">
+          <a href="consult.html" class="btn btn-primary">移住相談フォームへ</a>
+          <a href="matching.html" class="btn" style="background:transparent; color:var(--white); border:1.5px solid rgba(255,255,255,.4);">空き家マッチング</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- フッター -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo">磐田市 地域おこし協力隊</div>
+          <p class="footer-desc">移住・定住促進と空き家活用を通じて、磐田市の地域活性化に取り組んでいます。</p>
+        </div>
+        <div>
+          <div class="footer-heading">ページ一覧</div>
+          <ul class="footer-links">
+            <li><a href="about.html">地域おこし協力隊とは</a></li>
+            <li><a href="members.html">隊員紹介</a></li>
+            <li><a href="iju.html">移住情報</a></li>
+            <li><a href="akiya-bank.html">空き家バンク</a></li>
+            <li><a href="matching.html">空き家マッチング</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">相談・お問い合わせ</div>
+          <ul class="footer-links">
+            <li><a href="consult.html">移住相談フォーム</a></li>
+            <li><a href="faq.html">よくある質問</a></li>
+            <li><a href="events.html">イベント・お知らせ</a></li>
+            <li><a href="voices.html">移住者の声</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 磐田市 地域おこし協力隊. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // スクロールでヘッダーに影
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    // ハンバーガーメニュー
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+    });
+    mobileNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileNav.classList.remove('open');
+      });
+    });
+
+    // スクロールアニメーション
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
