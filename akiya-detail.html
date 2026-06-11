@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>物件詳細｜磐田市 地域おこし協力隊</title>
+  <meta name="description" content="磐田市空き家バンク登録物件の詳細情報です。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .detail-wrap { max-width: 720px; margin: 0 auto; padding: 0 5% 80px; }
+
+    .photo-main {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, var(--blue-light), var(--green-light));
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray-500);
+      font-size: .9rem;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .photo-main img { width: 100%; height: 100%; object-fit: cover; }
+
+    .photo-thumbs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .photo-thumb {
+      aspect-ratio: 4/3;
+      background: var(--gray-100);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .75rem;
+      color: var(--gray-500);
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: border-color var(--transition);
+      overflow: hidden;
+    }
+    .photo-thumb:hover { border-color: var(--blue); }
+    .photo-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+    .prop-header { margin-bottom: 24px; }
+    .prop-header .prop-tags { margin-bottom: 10px; }
+    .prop-header h1 {
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      margin-bottom: 8px;
+      color: var(--gray-900);
+    }
+    .prop-header .price {
+      font-size: clamp(1.6rem, 4vw, 2rem);
+      font-weight: 700;
+      color: var(--blue-dark);
+    }
+    .prop-header .price small {
+      font-size: .8rem;
+      font-weight: 400;
+      color: var(--gray-500);
+      margin-left: 4px;
+    }
+
+    .spec-block {
+      background: var(--gray-50);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid var(--gray-100);
+    }
+    .spec-block-title {
+      font-size: .75rem;
+      font-weight: 700;
+      color: var(--gray-500);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .spec-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .spec-item {
+      display: flex;
+      flex-direction: column;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .spec-item:nth-last-child(-n+2) { border-bottom: none; }
+    .spec-key {
+      font-size: .78rem;
+      color: var(--gray-500);
+      margin-bottom: 3px;
+    }
+    .spec-val {
+      font-size: .95rem;
+      font-weight: 500;
+      color: var(--gray-900);
+    }
+
+    .map-block {
+      background: var(--blue-light);
+      border-radius: var(--radius-md);
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      border: 1px solid #B5D4F4;
+      color: var(--blue-dark);
+      font-size: .9rem;
+    }
+
+    .contact-block {
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .contact-block-title {
+      font-size: .85rem;
+      color: var(--gray-500);
+      margin-bottom: 6px;
+    }
+    .contact-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .contact-tel {
+      font-size: 1rem;
+      color: var(--gray-700);
+      margin-bottom: 16px;
+    }
+
+    .cta-block {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .btn-ext {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px;
+      border-radius: var(--radius-md);
+      font-size: .95rem;
+      font-weight: 600;
+      border: 1.5px solid var(--gray-300);
+      color: var(--gray-700);
+      background: var(--white);
+      transition: all var(--transition);
+      cursor: pointer;
+    }
+    .btn-ext:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+    .btn-ext .ext-icon { font-size: 1rem; }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .875rem;
+      color: var(--gray-500);
+      margin-bottom: 20px;
+      transition: color var(--transition);
+    }
+    .back-link:hover { color: var(--blue); }
+
+    .notice-box {
+      background: var(--blue-light);
+      border-left: 4px solid var(--blue);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 12px 16px;
+      font-size: .825rem;
+      color: var(--blue-dark);
+      margin-bottom: 24px;
+      line-height: 1.7;
+    }
+
+    .sold-badge {
+      display: inline-block;
+      background: #FDECEA;
+      color: #C0392B;
+      font-size: .8rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    @media (max-width: 600px) {
+      .spec-grid { grid-template-columns: 1fr; }
+      .spec-item:last-child { border-bottom: none; }
+      .photo-thumbs { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">
+        磐田市 地域おこし協力隊
+        <span>Iwata City Regional Cooperation</span>
+      </a>
+      <nav class="nav-links">
+        <a href="about.html">協力隊とは</a>
+        <a href="members.html">隊員紹介</a>
+        <a href="iju.html">移住情報</a>
+        <a href="akiya-bank.html" style="color:var(--blue);font-weight:700;">空き家バンク</a>
+        <a href="matching.html">マッチング</a>
+        <a href="faq.html">FAQ</a>
+        <a href="consult.html" class="nav-cta">移住相談</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="about.html">協力隊とは</a>
+    <a href="members.html">隊員紹介</a>
+    <a href="iju.html">移住情報</a>
+    <a href="akiya-bank.html">空き家バンク</a>
+    <a href="matching.html">マッチング</a>
+    <a href="faq.html">FAQ</a>
+    <a href="consult.html" class="nav-cta">移住相談はこちら</a>
+  </nav>
+
+  <main style="padding-top: 80px;">
+    <div class="detail-wrap">
+
+      <a href="akiya-bank.html" class="back-link">← 物件一覧に戻る</a>
+
+      <div class="notice-box">
+        このページは<strong>磐田市空き家バンク</strong>の情報をもとに協力隊が整理したものです。契約・詳細は各不動産会社へ直接お問い合わせください。
+      </div>
+
+      <!-- 物件タイトル（JSで書き換え） -->
+      <div class="prop-header">
+        <div class="prop-tags" id="detailTags"></div>
+        <h1 id="detailTitle">物件詳細</h1>
+        <div class="price" id="detailPrice"></div>
+      </div>
+
+      <!-- メイン写真 -->
+      <div class="photo-main" id="photoMain">写真準備中</div>
+
+      <!-- サムネイル -->
+      <div class="photo-thumbs">
+        <div class="photo-thumb">写真2</div>
+        <div class="photo-thumb">写真3</div>
+        <div class="photo-thumb">写真4</div>
+        <div class="photo-thumb">写真5</div>
+      </div>
+
+      <!-- 基本情報 -->
+      <div class="spec-block">
+        <div class="spec-block-title">基本情報</div>
+        <div class="spec-grid" id="specBasic"></div>
+      </div>
+
+      <!-- 設備・条件 -->
+      <div class="spec-block">
+        <div class="spec-block-title">設備・条件</div>
+        <div class="spec-grid" id="specEquip"></div>
+      </div>
+
+      <!-- 地図 -->
+      <div class="map-block">📍 Googleマップ（公開時に埋め込み）</div>
+
+      <!-- 問い合わせ -->
+      <div class="contact-block">
+        <div class="contact-block-title">この物件のお問い合わせ先</div>
+        <div class="contact-name" id="contactName"></div>
+        <div class="contact-tel" id="contactTel"></div>
+        <div class="cta-block">
+          <a href="consult.html" class="btn btn-primary btn-full">協力隊に相談する（無料）</a>
+          <a id="cityLink" href="https://www.city.iwata.shizuoka.jp/kurashi_tetsuzuki/juutaku_pet_seikatsu/1010112/1009122/index.html" target="_blank" class="btn-ext">
+            <span class="ext-icon">🏛️</span>
+            市の空き家バンクで詳細を見る
+            <span style="font-size:.75rem;margin-left:auto;color:var(--gray-400)">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 関連物件 -->
+      <div style="margin-top: 48px;">
+        <h3 style="margin-bottom: 16px;">他の物件を見る</h3>
+        <a href="akiya-bank.html" class="btn btn-secondary btn-full">物件一覧に戻る</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo">磐田市 地域おこし協力隊</div>
+          <p class="footer-desc">移住・定住促進と空き家活用を通じて、磐田市の地域活性化に取り組んでいます。</p>
+        </div>
+        <div>
+          <div class="footer-heading">ページ一覧</div>
+          <ul class="footer-links">
+            <li><a href="about.html">地域おこし協力隊とは</a></li>
+            <li><a href="members.html">隊員紹介</a></li>
+            <li><a href="iju.html">移住情報</a></li>
+            <li><a href="akiya-bank.html">空き家バンク</a></li>
+            <li><a href="matching.html">空き家マッチング</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">相談・お問い合わせ</div>
+          <ul class="footer-links">
+            <li><a href="consult.html">移住相談フォーム</a></li>
+            <li><a href="faq.html">よくある質問</a></li>
+            <li><a href="events.html">イベント・お知らせ</a></li>
+            <li><a href="voices.html">移住者の声</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 磐田市 地域おこし協力隊. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 10);
+    });
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+    });
+    mobileNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileNav.classList.remove('open');
+      });
+    });
+
+    // 物件データ
+    const properties = {
+      'prop-01': {
+        title: '磐田市内　古民家戸建て',
+        price: '133万円',
+        priceNote: '（税込）',
+        tags: [{ label: '売買', cls: 'tag' }, { label: '磐田', cls: 'tag-green tag' }, { label: '古民家', cls: 'tag' }],
+        basic: [
+          { key: '物件種類', val: '戸建て（古民家）' },
+          { key: '所在地',   val: '静岡県磐田市内' },
+          { key: '間取り',   val: '調査中' },
+          { key: '建物面積', val: '調査中' },
+          { key: '土地面積', val: '調査中' },
+          { key: '築年月',   val: '調査中' },
+          { key: '建物構造', val: '木造' },
+          { key: '交通',     val: '調査中' },
+        ],
+        equip: [
+          { key: '水道',     val: '公営' },
+          { key: 'ガス',     val: '調査中' },
+          { key: '駐車場',   val: '調査中' },
+          { key: '現況',     val: '空き家' },
+          { key: '引き渡し', val: '要相談' },
+          { key: 'リフォーム', val: '調査中' },
+        ],
+        contact: { name: '富士ヶ丘サービス株式会社', tel: 'TEL：0538-31-3308' },
+      },
+      'prop-02': {
+        title: '磐田市内　中古戸建住宅',
+        price: '1,690万円',
+        priceNote: '（税込）',
+        tags: [{ label: '売買', cls: 'tag' }, { label: '磐田', cls: 'tag-green tag' }],
+        basic: [
+          { key: '物件種類', val: '戸建て' },
+          { key: '所在地',   val: '静岡県磐田市内' },
+          { key: '間取り',   val: '調査中' },
+          { key: '建物面積', val: '調査中' },
+          { key: '土地面積', val: '調査中' },
+          { key: '築年月',   val: '昭和63年' },
+          { key: '建物構造', val: '木造' },
+          { key: '交通',     val: '調査中' },
+        ],
+        equip: [
+          { key: '水道',     val: '公営' },
+          { key: 'ガス',     val: '調査中' },
+          { key: '駐車場',   val: '調査中' },
+          { key: '現況',     val: '空き家' },
+          { key: '引き渡し', val: '要相談' },
+          { key: 'リフォーム', val: '調査中' },
+        ],
+        contact: { name: '富士ヶ丘サービス株式会社', tel: 'TEL：0538-31-3308' },
+      },
+      'prop-03': {
+        title: '磐田市内　戸建て住宅',
+        price: '1,470万円',
+        priceNote: '（税込）',
+        tags: [{ label: '売買', cls: 'tag' }, { label: '磐田', cls: 'tag-green tag' }],
+        basic: [
+          { key: '物件種類', val: '戸建て' },
+          { key: '所在地',   val: '静岡県磐田市内' },
+          { key: '間取り',   val: '調査中' },
+          { key: '建物面積', val: '調査中' },
+          { key: '土地面積', val: '調査中' },
+          { key: '築年月',   val: '調査中' },
+          { key: '建物構造', val: '木造' },
+          { key: '交通',     val: '調査中' },
+        ],
+        equip: [
+          { key: '水道',     val: '公営' },
+          { key: 'ガス',     val: '調査中' },
+          { key: '駐車場',   val: '調査中' },
+          { key: '現況',     val: '空き家' },
+          { key: '引き渡し', val: '要相談' },
+          { key: 'リフォーム', val: '調査中' },
+        ],
+        contact: { name: '富士ヶ丘サービス株式会社', tel: 'TEL：0538-31-3308' },
+      },
+      'prop-04': {
+        title: '磐田市今之浦　中古戸建て',
+        price: '1,899万円',
+        priceNote: '（税込）',
+        tags: [{ label: '売買', cls: 'tag' }, { label: '磐田', cls: 'tag-green tag' }],
+        basic: [
+          { key: '物件種類', val: '戸建て' },
+          { key: '所在地',   val: '静岡県磐田市今之浦' },
+          { key: '間取り',   val: '調査中' },
+          { key: '建物面積', val: '調査中' },
+          { key: '土地面積', val: '調査中' },
+          { key: '築年月',   val: '調査中' },
+          { key: '建物構造', val: '木造' },
+          { key: '交通',     val: '調査中' },
+        ],
+        equip: [
+          { key: '水道',     val: '公営' },
+          { key: 'ガス',     val: '調査中' },
+          { key: '駐車場',   val: '調査中' },
+          { key: '現況',     val: '空き家' },
+          { key: '引き渡し', val: '要相談' },
+          { key: 'リフォーム', val: '調査中' },
+        ],
+        contact: { name: '株式会社カチタス磐田店', tel: 'TEL：0538-21-4810' },
+      },
+      'prop-05': {
+        title: '豊岡地区　平屋古民家',
+        price: '850万円',
+        priceNote: '（税込）',
+        tags: [{ label: '売買', cls: 'tag' }, { label: '豊岡', cls: 'tag-green tag' }, { label: '古民家', cls: 'tag' }, { label: '平屋', cls: 'tag' }],
+        basic: [
+          { key: '物件種類', val: '戸建て（平屋・古民家）' },
+          { key: '所在地',   val: '静岡県磐田市豊岡地区' },
+          { key: '間取り',   val: '調査中' },
+          { key: '建物面積', val: '調査中' },
+          { key: '土地面積', val: '調査中' },
+          { key: '築年月',   val: '調査中' },
+          { key: '建物構造', val: '木造' },
+          { key: '交通',     val: '調査中' },
+        ],
+        equip: [
+          { key: '水道',     val: '公営' },
+          { key: 'ガス',     val: '調査中' },
+          { key: '駐車場',   val: '調査中' },
+          { key: '現況',     val: '空き家' },
+          { key: '引き渡し', val: '要相談' },
+          { key: 'リフォーム', val: '調査中' },
+        ],
+        contact: { name: '富士ヶ丘サービス株式会社', tel: 'TEL：0538-31-3308' },
+      },
+      'prop-06': {
+        title: '豊田地区　リフォーム済み戸建て',
+        price: '1,200万円',
+        priceNote: '（税込）',
+        tags: [{ label: '売買', cls: 'tag' }, { label: '豊田', cls: 'tag-green tag' }, { label: '駐車場あり', cls: 'tag' }, { label: 'リフォーム済', cls: 'tag' }],
+        basic: [
+          { key: '物件種類', val: '戸建て' },
+          { key: '所在地',   val: '静岡県磐田市豊田地区' },
+          { key: '間取り',   val: '調査中' },
+          { key: '建物面積', val: '調査中' },
+          { key: '土地面積', val: '調査中' },
+          { key: '築年月',   val: '調査中' },
+          { key: '建物構造', val: '木造' },
+          { key: '交通',     val: '調査中' },
+        ],
+        equip: [
+          { key: '水道',     val: '公営' },
+          { key: 'ガス',     val: '調査中' },
+          { key: '駐車場',   val: 'あり' },
+          { key: '現況',     val: '空き家' },
+          { key: '引き渡し', val: '要相談' },
+          { key: 'リフォーム', val: '済み' },
+        ],
+        contact: { name: '富士ヶ丘サービス株式会社', tel: 'TEL：0538-31-3308' },
+      },
+      'prop-07': {
+        title: '竜洋地区　一戸建て',
+        price: '4.5万円',
+        priceNote: '/月',
+        tags: [{ label: '賃貸', cls: 'tag' }, { label: '竜洋', cls: 'tag-green tag' }, { label: '駐車場あり', cls: 'tag' }],
+        basic: [
+          { key: '物件種類', val: '戸建て（賃貸）' },
+          { key: '所在地',   val: '静岡県磐田市竜洋地区' },
+          { key: '間取り',   val: '調査中' },
+          { key: '建物面積', val: '調査中' },
+          { key: '土地面積', val: '調査中' },
+          { key: '築年月',   val: '調査中' },
+          { key: '建物構造', val: '木造' },
+          { key: '交通',     val: '調査中' },
+        ],
+        equip: [
+          { key: '水道',     val: '公営' },
+          { key: 'ガス',     val: '調査中' },
+          { key: '駐車場',   val: 'あり' },
+          { key: '現況',     val: '空き家' },
+          { key: '引き渡し', val: '要相談' },
+          { key: 'リフォーム', val: '調査中' },
+        ],
+        contact: { name: '富士ヶ丘サービス株式会社', tel: 'TEL：0538-31-3308' },
+      },
+      'prop-08': {
+        title: '福田地区　古民家戸建て',
+        price: '980万円',
+        priceNote: '（税込）',
+        tags: [{ label: '売買', cls: 'tag' }, { label: '福田', cls: 'tag-green tag' }, { label: '古民家', cls: 'tag' }, { label: '駐車場あり', cls: 'tag' }],
+        basic: [
+          { key: '物件種類', val: '戸建て（古民家）' },
+          { key: '所在地',   val: '静岡県磐田市福田地区' },
+          { key: '間取り',   val: '調査中' },
+          { key: '建物面積', val: '調査中' },
+          { key: '土地面積', val: '調査中' },
+          { key: '築年月',   val: '調査中' },
+          { key: '建物構造', val: '木造' },
+          { key: '交通',     val: '調査中' },
+        ],
+        equip: [
+          { key: '水道',     val: '公営' },
+          { key: 'ガス',     val: '調査中' },
+          { key: '駐車場',   val: 'あり' },
+          { key: '現況',     val: '空き家' },
+          { key: '引き渡し', val: '要相談' },
+          { key: 'リフォーム', val: '調査中' },
+        ],
+        contact: { name: '富士ヶ丘サービス株式会社', tel: 'TEL：0538-31-3308' },
+      },
+    };
+
+    // URLパラメータから物件IDを取得
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id') || 'prop-01';
+    const prop = properties[id] || properties['prop-01'];
+
+    // ページタイトル
+    document.title = prop.title + '｜磐田市 地域おこし協力隊';
+
+    // タグ
+    document.getElementById('detailTags').innerHTML =
+      prop.tags.map(t => `<span class="${t.cls}" style="margin-right:6px">${t.label}</span>`).join('');
+
+    // タイトル・価格
+    document.getElementById('detailTitle').textContent = prop.title;
+    document.getElementById('detailPrice').innerHTML =
+      prop.price + `<small>${prop.priceNote}</small>`;
+
+    // 基本情報
+    document.getElementById('specBasic').innerHTML = prop.basic.map(s =>
+      `<div class="spec-item"><div class="spec-key">${s.key}</div><div class="spec-val">${s.val}</div></div>`
+    ).join('');
+
+    // 設備
+    document.getElementById('specEquip').innerHTML = prop.equip.map(s =>
+      `<div class="spec-item"><div class="spec-key">${s.key}</div><div class="spec-val">${s.val}</div></div>`
+    ).join('');
+
+    // 問い合わせ先
+    document.getElementById('contactName').textContent = prop.contact.name;
+    document.getElementById('contactTel').textContent = prop.contact.tel;
+  </script>
+
+</body>
+</html>
