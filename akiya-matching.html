@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>空き家マッチング｜磐田市 地域おこし協力隊</title>
+  <meta name="description" content="磐田市の空き家マッチングページ。空き家を貸したい・売りたい所有者と、空き家を活用したい方の情報を掲載しています。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .tab-wrap {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid var(--gray-200);
+      margin-bottom: 32px;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 14px 8px;
+      font-size: .95rem;
+      font-weight: 600;
+      color: var(--gray-500);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: all var(--transition);
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+    .tab-btn:hover { color: var(--blue); }
+    .tab-btn.active { color: var(--blue-dark); border-bottom-color: var(--blue); }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .matching-card {
+      background: var(--white);
+      border: 1px solid var(--gray-100);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow var(--transition);
+    }
+    .matching-card:hover { box-shadow: var(--shadow-md); }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .card-number {
+      font-size: .75rem;
+      color: var(--gray-400);
+      font-weight: 400;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      line-height: 1.4;
+    }
+    .card-date {
+      font-size: .75rem;
+      color: var(--gray-400);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .card-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .spec-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px 16px;
+      margin-bottom: 16px;
+      padding: 14px;
+      background: var(--gray-50);
+      border-radius: var(--radius-sm);
+    }
+    .spec-list-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .spec-list-key {
+      font-size: .72rem;
+      color: var(--gray-400);
+      font-weight: 500;
+    }
+    .spec-list-val {
+      font-size: .88rem;
+      color: var(--gray-800);
+      font-weight: 500;
+    }
+
+    .voice-box {
+      background: var(--blue-light);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-size: .9rem;
+      color: var(--blue-dark);
+      line-height: 1.75;
+      margin-bottom: 16px;
+      border-left: 3px solid var(--blue);
+    }
+    .voice-box.green {
+      background: var(--green-light);
+      color: #1E5C38;
+      border-left-color: var(--green);
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 14px;
+      border-top: 1px solid var(--gray-100);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .card-id {
+      font-size: .75rem;
+      color: var(--gray-400);
+    }
+    .btn-contact-small {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      background: var(--blue);
+      color: var(--white);
+      border-radius: 100px;
+      font-size: .82rem;
+      font-weight: 600;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .btn-contact-small:hover { background: var(--blue-dark); transform: translateY(-1px); }
+
+    .disclaimer-box {
+      background: #FFF8E1;
+      border: 1px solid #FFE082;
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 32px;
+      font-size: .875rem;
+      line-height: 1.8;
+      color: #5D4037;
+    }
+    .disclaimer-box strong { color: #4E342E; }
+
+    .register-cta {
+      background: var(--gray-50);
+      border-radius: var(--radius-lg);
+      padding: 32px 24px;
+      text-align: center;
+      border: 1px solid var(--gray-100);
+      margin-top: 40px;
+    }
+    .register-cta h3 { margin-bottom: 8px; }
+    .register-cta p { color: var(--gray-500); font-size: .9rem; margin-bottom: 24px; }
+    .register-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    .empty-state {
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--gray-400);
+    }
+    .empty-state .icon { font-size: 2.5rem; margin-bottom: 12px; }
+
+    .status-badge {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+    .status-open { background: #E8F5E9; color: #2E7D32; }
+    .status-matched { background: #FFF3E0; color: #E65100; }
+
+    @media (max-width: 600px) {
+      .spec-list { grid-template-columns: 1fr; }
+      .register-btns { flex-direction: column; }
+      .register-btns .btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">
+        磐田市 地域おこし協力隊
+        <span>Iwata City Regional Cooperation</span>
+      </a>
+      <nav class="nav-links">
+        <a href="about.html">協力隊とは</a>
+        <a href="members.html">隊員紹介</a>
+        <a href="iju.html">移住情報</a>
+        <a href="akiya-bank.html">空き家バンク</a>
+        <a href="matching.html" style="color:var(--blue);font-weight:700;">マッチング</a>
+        <a href="faq.html">FAQ</a>
+        <a href="consult.html" class="nav-cta">移住相談</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="about.html">協力隊とは</a>
+    <a href="members.html">隊員紹介</a>
+    <a href="iju.html">移住情報</a>
+    <a href="akiya-bank.html">空き家バンク</a>
+    <a href="matching.html">マッチング</a>
+    <a href="faq.html">FAQ</a>
+    <a href="consult.html" class="nav-cta">移住相談はこちら</a>
+  </nav>
+
+  <main>
+
+    <div class="page-hero">
+      <div class="container">
+        <div class="breadcrumb" style="padding-top:0; margin-bottom:16px;">
+          <a href="index.html">HOME</a><span>›</span><span>空き家マッチング</span>
+        </div>
+        <h1>空き家マッチング</h1>
+        <p>空き家を持つ方と活用したい方をつなぐ情報掲示板です</p>
+      </div>
+    </div>
+
+    <section class="section" style="padding-top:40px;">
+      <div class="container">
+
+        <!-- 免責・立場の明示 -->
+        <div class="disclaimer-box fade-up">
+          <strong>⚠️ ご利用前にご確認ください</strong><br>
+          このページは地域おこし協力隊が運営する<strong>情報掲示板</strong>です。協力隊は不動産業者ではないため、<strong>契約・交渉・仲介には関与できません</strong>。掲載情報をもとに関心を持たれた方は、協力隊を通じてお互いをご紹介します。その後の交渉・契約は当事者間または不動産会社を通じて行ってください。掲載を希望される方はページ下部のフォームからご連絡ください。
+        </div>
+
+        <!-- タブ -->
+        <div class="tab-wrap fade-up">
+          <button class="tab-btn active" onclick="switchTab('owner')">
+            🏠 空き家を貸したい・売りたい
+          </button>
+          <button class="tab-btn" onclick="switchTab('user')">
+            🔍 空き家を探している・活用したい
+          </button>
+        </div>
+
+        <!-- ===== 所有者タブ ===== -->
+        <div class="tab-panel active" id="tab-owner">
+
+          <!-- 物件1 -->
+          <div class="matching-card fade-up">
+            <div class="card-header">
+              <div>
+                <span class="card-number">No.001</span>
+                <div class="card-title">掛塚地区・築50年の古民家　賃貸希望</div>
+              </div>
+              <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+                <span class="status-badge status-open">募集中</span>
+                <span class="card-date">2026.05.10</span>
+              </div>
+            </div>
+            <div class="card-tags">
+              <span class="tag">賃貸</span>
+              <span class="tag-green tag">磐田エリア</span>
+              <span class="tag">古民家</span>
+              <span class="tag">平屋</span>
+            </div>
+            <div class="spec-list">
+              <div class="spec-list-item">
+                <span class="spec-list-key">所在エリア</span>
+                <span class="spec-list-val">磐田市掛塚地区</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">建物の種類</span>
+                <span class="spec-list-val">古民家・平屋</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">おおよその広さ</span>
+                <span class="spec-list-val">100㎡以上</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">築年数</span>
+                <span class="spec-list-val">築50年以上</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">希望する活用方法</span>
+                <span class="spec-list-val">居住・カフェ・工房など</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">駐車場</span>
+                <span class="spec-list-val">あり（2台）</span>
+              </div>
+            </div>
+            <div class="voice-box">
+              「親が住んでいた家ですが、空き家になって数年が経ちます。古い建物ですが、大切に使ってくれる方に貸したいと思っています。リフォームについても相談に応じます。」
+            </div>
+            <div class="card-footer">
+              <span class="card-id">掲載ID：OWN-001</span>
+              <a href="consult.html?ref=OWN-001" class="btn-contact-small">この物件に関心がある</a>
+            </div>
+          </div>
+
+          <!-- 物件2 -->
+          <div class="matching-card fade-up">
+            <div class="card-header">
+              <div>
+                <span class="card-number">No.002</span>
+                <div class="card-title">豊田地区・空き家　売却または賃貸を検討中</div>
+              </div>
+              <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+                <span class="status-badge status-open">募集中</span>
+                <span class="card-date">2026.04.22</span>
+              </div>
+            </div>
+            <div class="card-tags">
+              <span class="tag">売却・賃貸どちらも可</span>
+              <span class="tag-green tag">豊田エリア</span>
+              <span class="tag">一戸建て</span>
+            </div>
+            <div class="spec-list">
+              <div class="spec-list-item">
+                <span class="spec-list-key">所在エリア</span>
+                <span class="spec-list-val">磐田市豊田地区</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">建物の種類</span>
+                <span class="spec-list-val">一戸建て・2階建て</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">おおよその広さ</span>
+                <span class="spec-list-val">80〜100㎡</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">築年数</span>
+                <span class="spec-list-val">築30年程度</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">希望する活用方法</span>
+                <span class="spec-list-val">居住・テレワーク拠点など</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">駐車場</span>
+                <span class="spec-list-val">あり（1台）</span>
+              </div>
+            </div>
+            <div class="voice-box">
+              「相続した家ですが、遠方に住んでいるため管理が難しくなっています。売却でも賃貸でも、活用してくれる方を探しています。価格は相談に応じます。」
+            </div>
+            <div class="card-footer">
+              <span class="card-id">掲載ID：OWN-002</span>
+              <a href="consult.html?ref=OWN-002" class="btn-contact-small">この物件に関心がある</a>
+            </div>
+          </div>
+
+          <!-- 物件3 -->
+          <div class="matching-card fade-up">
+            <div class="card-header">
+              <div>
+                <span class="card-number">No.003</span>
+                <div class="card-title">福田地区・倉庫付き空き家　事業利用歓迎</div>
+              </div>
+              <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+                <span class="status-badge status-open">募集中</span>
+                <span class="card-date">2026.04.05</span>
+              </div>
+            </div>
+            <div class="card-tags">
+              <span class="tag">賃貸</span>
+              <span class="tag-green tag">福田エリア</span>
+              <span class="tag">倉庫あり</span>
+              <span class="tag">事業利用可</span>
+            </div>
+            <div class="spec-list">
+              <div class="spec-list-item">
+                <span class="spec-list-key">所在エリア</span>
+                <span class="spec-list-val">磐田市福田地区</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">建物の種類</span>
+                <span class="spec-list-val">一戸建て＋倉庫</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">おおよその広さ</span>
+                <span class="spec-list-val">母屋100㎡・倉庫50㎡</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">築年数</span>
+                <span class="spec-list-val">築40年程度</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">希望する活用方法</span>
+                <span class="spec-list-val">居住・小規模事業所など</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">駐車場</span>
+                <span class="spec-list-val">あり（複数台可）</span>
+              </div>
+            </div>
+            <div class="voice-box">
+              「倉庫もついているので、ものづくりや農業など事業で使いたい方にも向いています。海が近く、のびのびとした環境です。丁寧に使ってくれる方を探しています。」
+            </div>
+            <div class="card-footer">
+              <span class="card-id">掲載ID：OWN-003</span>
+              <a href="consult.html?ref=OWN-003" class="btn-contact-small">この物件に関心がある</a>
+            </div>
+          </div>
+
+          <!-- 登録CTA -->
+          <div class="register-cta fade-up">
+            <h3>空き家を掲載したい大家さんへ</h3>
+            <p>売りたい・貸したい空き家の情報を協力隊にお知らせください。掲載は無料です。契約・交渉には関与しませんが、関心を持つ方をご紹介します。</p>
+            <div class="register-btns">
+              <a href="consult.html" class="btn btn-primary">空き家を登録する（無料）</a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ===== 活用希望者タブ ===== -->
+        <div class="tab-panel" id="tab-user">
+
+          <!-- 希望1 -->
+          <div class="matching-card fade-up">
+            <div class="card-header">
+              <div>
+                <span class="card-number">No.001</span>
+                <div class="card-title">古民家でカフェ・ゲストハウスを開きたい</div>
+              </div>
+              <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+                <span class="status-badge status-open">募集中</span>
+                <span class="card-date">2026.05.15</span>
+              </div>
+            </div>
+            <div class="card-tags">
+              <span class="tag">賃貸希望</span>
+              <span class="tag-green tag">エリア不問</span>
+              <span class="tag">古民家</span>
+              <span class="tag">事業利用</span>
+            </div>
+            <div class="spec-list">
+              <div class="spec-list-item">
+                <span class="spec-list-key">希望エリア</span>
+                <span class="spec-list-val">磐田市内（エリア不問）</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">希望する建物</span>
+                <span class="spec-list-val">古民家・100㎡以上</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">活用方法</span>
+                <span class="spec-list-val">カフェ・ゲストハウス</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">希望家賃</span>
+                <span class="spec-list-val">〜8万円／月</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">リフォーム</span>
+                <span class="spec-list-val">DIY・リノベ可能な物件希望</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">入居希望時期</span>
+                <span class="spec-list-val">2026年内</span>
+              </div>
+            </div>
+            <div class="voice-box green">
+              「磐田の古い町並みが好きで、古民家を活かしたカフェとゲストハウスを開くのが夢です。梁や土間が残っている物件が理想です。自分でDIYもできます。移住も考えています。」
+            </div>
+            <div class="card-footer">
+              <span class="card-id">掲載ID：USR-001</span>
+              <a href="consult.html?ref=USR-001" class="btn-contact-small">この方に関心がある</a>
+            </div>
+          </div>
+
+          <!-- 希望2 -->
+          <div class="matching-card fade-up">
+            <div class="card-header">
+              <div>
+                <span class="card-number">No.002</span>
+                <div class="card-title">テレワーク移住・家族3人で田舎暮らし希望</div>
+              </div>
+              <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+                <span class="status-badge status-open">募集中</span>
+                <span class="card-date">2026.05.08</span>
+              </div>
+            </div>
+            <div class="card-tags">
+              <span class="tag">賃貸希望</span>
+              <span class="tag-green tag">竜洋・福田エリア</span>
+              <span class="tag">子育て世帯</span>
+              <span class="tag">庭あり希望</span>
+            </div>
+            <div class="spec-list">
+              <div class="spec-list-item">
+                <span class="spec-list-key">希望エリア</span>
+                <span class="spec-list-val">竜洋・福田地区周辺</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">希望する建物</span>
+                <span class="spec-list-val">一戸建て・3LDK以上</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">活用方法</span>
+                <span class="spec-list-val">家族での居住・テレワーク</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">希望家賃</span>
+                <span class="spec-list-val">〜6万円／月</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">駐車場</span>
+                <span class="spec-list-val">2台以上必須</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">入居希望時期</span>
+                <span class="spec-list-val">2026年秋ごろ</span>
+              </div>
+            </div>
+            <div class="voice-box green">
+              「名古屋からの移住を検討しています。夫婦ともにテレワーク勤務で、小学生の子どもが1人います。庭で家庭菜園ができる環境が理想。海が近い竜洋・福田エリアに憧れています。」
+            </div>
+            <div class="card-footer">
+              <span class="card-id">掲載ID：USR-002</span>
+              <a href="consult.html?ref=USR-002" class="btn-contact-small">この方に関心がある</a>
+            </div>
+          </div>
+
+          <!-- 希望3 -->
+          <div class="matching-card fade-up">
+            <div class="card-header">
+              <div>
+                <span class="card-number">No.003</span>
+                <div class="card-title">農業×DIYリノベ・空き家を拠点にしたい</div>
+              </div>
+              <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+                <span class="status-badge status-open">募集中</span>
+                <span class="card-date">2026.04.18</span>
+              </div>
+            </div>
+            <div class="card-tags">
+              <span class="tag">購入希望</span>
+              <span class="tag-green tag">豊岡・豊田エリア</span>
+              <span class="tag">農地付き希望</span>
+              <span class="tag">DIY可</span>
+            </div>
+            <div class="spec-list">
+              <div class="spec-list-item">
+                <span class="spec-list-key">希望エリア</span>
+                <span class="spec-list-val">豊岡・豊田地区周辺</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">希望する建物</span>
+                <span class="spec-list-val">古民家・農地付きあれば尚良</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">活用方法</span>
+                <span class="spec-list-val">居住＋小規模農業</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">希望価格</span>
+                <span class="spec-list-val">〜500万円</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">リフォーム</span>
+                <span class="spec-list-val">自分でDIYリノベする予定</span>
+              </div>
+              <div class="spec-list-item">
+                <span class="spec-list-key">入居希望時期</span>
+                <span class="spec-list-val">急ぎではない・じっくり探す</span>
+              </div>
+            </div>
+            <div class="voice-box green">
+              「東京から磐田に移住予定です。農業をやりながら古民家をDIYで直して住みたいと思っています。多少ボロくても大丈夫。農地が付いていると嬉しいです。」
+            </div>
+            <div class="card-footer">
+              <span class="card-id">掲載ID：USR-003</span>
+              <a href="consult.html?ref=USR-003" class="btn-contact-small">この方に関心がある</a>
+            </div>
+          </div>
+
+          <!-- 登録CTA -->
+          <div class="register-cta fade-up">
+            <h3>空き家を探している方へ</h3>
+            <p>希望エリア・活用方法・予算などを協力隊にお知らせください。掲載は無料です。条件に合う空き家オーナーをご紹介します。</p>
+            <div class="register-btns">
+              <a href="consult.html" class="btn btn-green">活用希望を登録する（無料）</a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- マッチングの流れ -->
+    <section class="section" style="background:var(--gray-50);">
+      <div class="container">
+        <h2 class="section-title fade-up">マッチングの流れ</h2>
+        <p class="section-sub fade-up">協力隊が間に入り、双方を紹介します。契約・交渉は当事者間で行ってください。</p>
+        <div class="grid-3" style="max-width:800px;margin:0 auto;">
+
+          <div class="card fade-up">
+            <div class="card-body" style="text-align:center;padding:28px 20px;">
+              <div style="font-size:2rem;margin-bottom:12px;">📝</div>
+              <h3 style="margin-bottom:8px;font-size:1rem;">① 情報を登録</h3>
+              <p style="font-size:.85rem;">フォームから空き家情報または希望条件を協力隊に送る。掲載は無料。</p>
+            </div>
+          </div>
+
+          <div class="card fade-up">
+            <div class="card-body" style="text-align:center;padding:28px 20px;">
+              <div style="font-size:2rem;margin-bottom:12px;">🤝</div>
+              <h3 style="margin-bottom:8px;font-size:1rem;">② 協力隊が紹介</h3>
+              <p style="font-size:.85rem;">条件が合いそうな双方に協力隊から連絡し、お互いを紹介します。</p>
+            </div>
+          </div>
+
+          <div class="card fade-up">
+            <div class="card-body" style="text-align:center;padding:28px 20px;">
+              <div style="font-size:2rem;margin-bottom:12px;">🏠</div>
+              <h3 style="margin-bottom:8px;font-size:1rem;">③ 当事者間で交渉</h3>
+              <p style="font-size:.85rem;">見学・条件交渉・契約は当事者間で。必要に応じて不動産会社を介してください。</p>
+            </div>
+          </div>
+
+        </div>
+        <div class="notice-box" style="max-width:800px;margin:32px auto 0;font-size:.85rem;">
+          協力隊は不動産業者ではないため、価格交渉・契約書作成・仲介手数料の受け取りなど不動産取引に関わる行為は行いません。紹介後のトラブルについても責任を負いかねます。必要に応じて宅地建物取引士や司法書士などの専門家にご相談ください。
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo">磐田市 地域おこし協力隊</div>
+          <p class="footer-desc">移住・定住促進と空き家活用を通じて、磐田市の地域活性化に取り組んでいます。</p>
+        </div>
+        <div>
+          <div class="footer-heading">ページ一覧</div>
+          <ul class="footer-links">
+            <li><a href="about.html">地域おこし協力隊とは</a></li>
+            <li><a href="members.html">隊員紹介</a></li>
+            <li><a href="iju.html">移住情報</a></li>
+            <li><a href="akiya-bank.html">空き家バンク</a></li>
+            <li><a href="matching.html">空き家マッチング</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">相談・お問い合わせ</div>
+          <ul class="footer-links">
+            <li><a href="consult.html">移住相談フォーム</a></li>
+            <li><a href="faq.html">よくある質問</a></li>
+            <li><a href="events.html">イベント・お知らせ</a></li>
+            <li><a href="voices.html">移住者の声</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 磐田市 地域おこし協力隊. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 10);
+    });
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+    });
+    mobileNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileNav.classList.remove('open');
+      });
+    });
+
+    // タブ切り替え
+    function switchTab(id) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('tab-' + id).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    // フェードアップ
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80);
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
