@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>協力隊とは｜磐田市 地域おこし協力隊</title>
+  <meta name="description" content="地域おこし協力隊の制度概要と、磐田市での活動内容についてご紹介します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .about-lead {
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      line-height: 2;
+      color: var(--gray-700);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin: 48px 0;
+    }
+    .stat-box {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-100);
+      box-shadow: var(--shadow-sm);
+      padding: 32px 24px;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(2.2rem, 5vw, 3rem);
+      font-weight: 700;
+      color: var(--blue);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-unit {
+      font-size: .85rem;
+      font-weight: 400;
+      color: var(--gray-500);
+    }
+    .stat-label {
+      font-size: .9rem;
+      color: var(--gray-700);
+      font-weight: 500;
+    }
+    .external-link-box {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--blue-light);
+      border: 1.5px solid var(--blue);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      margin-top: 40px;
+      transition: box-shadow var(--transition);
+    }
+    .external-link-box:hover {
+      box-shadow: var(--shadow-md);
+    }
+    .external-link-box .ext-icon {
+      width: 44px; height: 44px;
+      background: var(--blue);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.3rem;
+    }
+    .external-link-box .ext-text { flex: 1; }
+    .external-link-box .ext-title {
+      font-weight: 700;
+      color: var(--blue-dark);
+      font-size: 1rem;
+      margin-bottom: 2px;
+    }
+    .external-link-box .ext-url {
+      font-size: .8rem;
+      color: var(--gray-500);
+    }
+    .external-link-box .ext-arrow {
+      color: var(--blue);
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .activity-card {
+      cursor: pointer;
+      text-align: center;
+    }
+    .activity-img-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, var(--blue-light), var(--green-light));
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gray-500);
+      font-size: .85rem;
+    }
+    .activity-card .card-body { padding: 20px 16px; }
+    .activity-field {
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--blue);
+      margin-bottom: 6px;
+    }
+    .activity-name {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .activity-area {
+      font-size: .8rem;
+      color: var(--gray-500);
+      margin-bottom: 10px;
+    }
+    .activity-desc {
+      font-size: .875rem;
+      color: var(--gray-700);
+      line-height: 1.7;
+    }
+    @media (max-width: 768px) {
+      .stats-row { grid-template-columns: 1fr; }
+      .external-link-box { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header class="site-header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">
+        磐田市 地域おこし協力隊
+        <span>Iwata City Regional Cooperation</span>
+      </a>
+      <nav class="nav-links">
+        <a href="about.html">協力隊とは</a>
+        <a href="activities.html">活動紹介</a>
+        <a href="iju.html">移住情報</a>
+        <a href="akiya-bank.html">空き家バンク</a>
+        <a href="akiya-matching.html">マッチング</a>
+        <a href="faq.html">FAQ</a>
+        <a href="consult.html" class="nav-cta">移住相談</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- モバイルナビ -->
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="about.html">協力隊とは</a>
+    <a href="activities.html">活動紹介</a>
+    <a href="iju.html">移住情報</a>
+    <a href="akiya-bank.html">空き家バンク</a>
+    <a href="akiya-matching.html">マッチング</a>
+    <a href="faq.html">FAQ</a>
+    <a href="consult.html" class="nav-cta">移住相談はこちら</a>
+  </nav>
+
+  <main>
+
+    <!-- ページヒーロー -->
+    <div class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" style="padding-top: 0; margin-bottom: 20px;">
+          <a href="index.html">トップ</a>
+          <span>›</span>
+          <span>協力隊とは</span>
+        </nav>
+        <h1 class="fade-up">協力隊とは</h1>
+        <p class="fade-up">地域おこし協力隊の制度と、磐田市での取り組みをご紹介します。</p>
+      </div>
+    </div>
+
+    <!-- 制度説明 -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title fade-up">地域おこし協力隊とは</h2>
+        <p class="section-sub fade-up">国が推進する、移住と地域活性化を組み合わせた取り組みです</p>
+
+        <div style="max-width: 720px; margin: 0 auto;">
+          <p class="about-lead fade-up">
+            都市地域から過疎地域等の条件不利地域に移住し、生活の拠点を移した者を、地方公共団体が「地域おこし協力隊」として委嘱し、地域おこしの支援や地域協力活動を行いながら、その地域への定住・定着を図る取り組みです。
+          </p>
+
+          <a href="https://www.iju-join.jp/chiikiokoshi/" target="_blank" rel="noopener noreferrer" class="external-link-box fade-up">
+            <div class="ext-icon">🔗</div>
+            <div class="ext-text">
+              <div class="ext-title">地域おこし協力隊の制度の詳細を見る（外部リンク）</div>
+              <div class="ext-url">https://www.iju-join.jp/chiikiokoshi/</div>
+            </div>
+            <div class="ext-arrow">→</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 磐田市の状況 -->
+    <section class="section" style="background: var(--gray-50);">
+      <div class="container">
+        <h2 class="section-title fade-up">磐田市の地域おこし協力隊</h2>
+        <p class="section-sub fade-up">2023年から委嘱を開始し、さまざまな分野で活動しています</p>
+
+        <div class="stats-row">
+          <div class="stat-box fade-up">
+            <div class="stat-num">2023<span class="stat-unit">年</span></div>
+            <div class="stat-label">委嘱開始</div>
+          </div>
+          <div class="stat-box fade-up">
+            <div class="stat-num">9<span class="stat-unit">名</span></div>
+            <div class="stat-label">現在の隊員数</div>
+          </div>
+          <div class="stat-box fade-up">
+            <div class="stat-num">5<span class="stat-unit">分野</span></div>
+            <div class="stat-label">活動分野</div>
+          </div>
+        </div>
+
+        <p class="about-lead fade-up" style="text-align: center;">
+          磐田市では2023年から委嘱を開始し、9名が分野ごとに活動中です。<br>
+          移住定住促進・空き家活用・農業・地域コミュニティ形成など、<br>
+          それぞれの得意分野を活かして地域に根ざした活動を展開しています。
+        </p>
+      </div>
+    </section>
+
+    <!-- 活動紹介 -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title fade-up">活動紹介</h2>
+        <p class="section-sub fade-up">各隊員の活動内容をご紹介します</p>
+
+        <div class="grid-3">
+
+          <div class="card activity-card fade-up" onclick="location.href='activities.html'">
+            <div class="activity-img-placeholder">活動写真</div>
+            <div class="card-body">
+              <div class="activity-field">移住定住促進</div>
+              <div class="activity-name">隊員 A</div>
+              <div class="activity-area">担当エリア：磐田市全域</div>
+              <div class="activity-desc">移住相談の窓口として、物件探しから生活情報の提供まで丁寧にサポートしています。</div>
+            </div>
+          </div>
+
+          <div class="card activity-card fade-up" onclick="location.href='activities.html'">
+            <div class="activity-img-placeholder">活動写真</div>
+            <div class="card-body">
+              <div class="activity-field">空き家活用</div>
+              <div class="activity-name">隊員 B</div>
+              <div class="activity-area">担当エリア：掛塚・豊田地区</div>
+              <div class="activity-desc">空き家オーナーと活用希望者をつなぐコーディネーターとして、マッチングを推進しています。</div>
+            </div>
+          </div>
+
+          <div class="card activity-card fade-up" onclick="location.href='activities.html'">
+            <div class="activity-img-placeholder">活動写真</div>
+            <div class="card-body">
+              <div class="activity-field">農業振興</div>
+              <div class="activity-name">隊員 C</div>
+              <div class="activity-area">担当エリア：豊田・竜洋地区</div>
+              <div class="activity-desc">地域の農家と連携し、援農活動や農産物のPRイベントを企画・実施しています。</div>
+            </div>
+          </div>
+
+          <div class="card activity-card fade-up" onclick="location.href='activities.html'">
+            <div class="activity-img-placeholder">活動写真</div>
+            <div class="card-body">
+              <div class="activity-field">地域コミュニティ</div>
+              <div class="activity-name">隊員 D</div>
+              <div class="activity-area">担当エリア：見付・城之崎地区</div>
+              <div class="activity-desc">地区の自治会や商店街と連携し、イベント企画や地域の絆づくりに取り組んでいます。</div>
+            </div>
+          </div>
+
+          <div class="card activity-card fade-up" onclick="location.href='activities.html'">
+            <div class="activity-img-placeholder">活動写真</div>
+            <div class="card-body">
+              <div class="activity-field">情報発信・観光</div>
+              <div class="activity-name">隊員 E</div>
+              <div class="activity-area">担当エリア：磐田市全域</div>
+              <div class="activity-desc">SNSやYouTubeを活用して磐田の魅力を発信。観光コンテンツの開発も手がけています。</div>
+            </div>
+          </div>
+
+          <div class="card activity-card fade-up" onclick="location.href='activities.html'">
+            <div class="activity-img-placeholder">活動写真</div>
+            <div class="card-body">
+              <div class="activity-field">移住定住促進</div>
+              <div class="activity-name">隊員 F</div>
+              <div class="activity-area">担当エリア：福田・竜洋地区</div>
+              <div class="activity-desc">UIターン移住者のコミュニティ形成を支援し、交流会や相談窓口を運営しています。</div>
+            </div>
+          </div>
+
+          <div class="card activity-card fade-up" onclick="location.href='activities.html'">
+            <div class="activity-img-placeholder">活動写真</div>
+            <div class="card-body">
+              <div class="activity-field">空き家活用</div>
+              <div class="activity-name">隊員 G</div>
+              <div class="activity-area">担当エリア：掛塚地区</div>
+              <div class="activity-desc">古民家再生プロジェクトを推進し、空き家を地域の賑わいスポットへと生まれ変わらせています。</div>
+            </div>
+          </div>
+
+          <div class="card activity-card fade-up" onclick="location.href='activities.html'">
+            <div class="activity-img-placeholder">活動写真</div>
+            <div class="card-body">
+              <div class="activity-field">農業振興</div>
+              <div class="activity-name">隊員 H</div>
+              <div class="activity-area">担当エリア：豊田地区</div>
+              <div class="activity-desc">有機農業の普及に取り組み、農業体験ツアーや直売所の企画運営を担当しています。</div>
+            </div>
+          </div>
+
+          <div class="card activity-card fade-up" onclick="location.href='activities.html'">
+            <div class="activity-img-placeholder">活動写真</div>
+            <div class="card-body">
+              <div class="activity-field">地域コミュニティ</div>
+              <div class="activity-name">隊員 I</div>
+              <div class="activity-area">担当エリア：竜洋・福田地区</div>
+              <div class="activity-desc">子育て世代の移住者を対象に、地域との関係づくりや子育て支援ネットワークを構築しています。</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+          <a href="activities.html" class="btn btn-primary fade-up">活動紹介をすべて見る</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 相談CTA -->
+    <section class="section" style="background: var(--gray-900); color: var(--white);">
+      <div class="container" style="text-align: center;">
+        <h2 class="fade-up" style="color: var(--white); margin-bottom: 16px;">協力隊に相談してみませんか</h2>
+        <p class="fade-up" style="color: var(--gray-300); max-width: 480px; margin: 0 auto 36px;">移住・定住のご相談から空き家活用のご相談まで、お気軽にお問い合わせください。</p>
+        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;" class="fade-up">
+          <a href="consult.html" class="btn btn-primary">移住相談フォームへ</a>
+          <a href="akiya-matching.html" class="btn" style="background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,.4);">空き家マッチング</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- フッター -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo">磐田市 地域おこし協力隊</div>
+          <p class="footer-desc">移住・定住促進と空き家活用を通じて、磐田市の地域活性化に取り組んでいます。</p>
+        </div>
+        <div>
+          <div class="footer-heading">ページ一覧</div>
+          <ul class="footer-links">
+            <li><a href="about.html">地域おこし協力隊とは</a></li>
+            <li><a href="activities.html">活動紹介</a></li>
+            <li><a href="iju.html">移住情報</a></li>
+            <li><a href="akiya-bank.html">空き家バンク</a></li>
+            <li><a href="akiya-matching.html">空き家マッチング</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">相談・お問い合わせ</div>
+          <ul class="footer-links">
+            <li><a href="consult.html">移住相談フォーム</a></li>
+            <li><a href="faq.html">よくある質問</a></li>
+            <li><a href="events.html">イベント・お知らせ</a></li>
+            <li><a href="voices.html">移住者の声</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 磐田市 地域おこし協力隊. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+    });
+    mobileNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileNav.classList.remove('open');
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
