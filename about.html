@@ -245,7 +245,14 @@
         <span>Iwata City Regional Cooperation</span>
       </a>
       <nav class="nav-links">
-        <a href="about.html">協力隊とは</a>
+        <div class="nav-dropdown">
+          <a href="about.html" class="nav-dropdown-toggle">協力隊とは <span class="nav-caret">▾</span></a>
+          <div class="nav-dropdown-menu">
+            <a href="about.html">制度の説明</a>
+            <a href="activities.html">活動紹介</a>
+            <a href="office.html">協力隊拠点</a>
+          </div>
+        </div>
         <a href="activities.html">活動紹介</a>
         <a href="iju.html">移住情報</a>
         <a href="akiya-bank.html">空き家バンク</a>
@@ -261,7 +268,14 @@
 
   <!-- モバイルナビ -->
   <nav class="mobile-nav" id="mobileNav">
-    <a href="about.html">協力隊とは</a>
+    <div class="mobile-sub-group">
+      <button class="mobile-sub-toggle" id="mobileSubToggle" aria-expanded="false">協力隊とは <span class="mobile-sub-caret">▾</span></button>
+      <div class="mobile-sub-menu" id="mobileSubMenu">
+        <a href="about.html">制度の説明</a>
+        <a href="activities.html">活動紹介</a>
+        <a href="office.html">協力隊拠点</a>
+      </div>
+    </div>
     <a href="activities.html">活動紹介</a>
     <a href="iju.html">移住情報</a>
     <a href="akiya-bank.html">空き家バンク</a>
@@ -554,14 +568,27 @@
 
     const hamburger = document.getElementById('hamburger');
     const mobileNav = document.getElementById('mobileNav');
+    const mobileSubToggle = document.getElementById('mobileSubToggle');
+    const mobileSubMenu = document.getElementById('mobileSubMenu');
     hamburger.addEventListener('click', () => {
       hamburger.classList.toggle('open');
       mobileNav.classList.toggle('open');
+      if (!mobileNav.classList.contains('open')) {
+        mobileSubToggle.setAttribute('aria-expanded', 'false');
+        mobileSubMenu.classList.remove('open');
+      }
+    });
+    mobileSubToggle.addEventListener('click', () => {
+      const expanded = mobileSubToggle.getAttribute('aria-expanded') === 'true';
+      mobileSubToggle.setAttribute('aria-expanded', String(!expanded));
+      mobileSubMenu.classList.toggle('open');
     });
     mobileNav.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => {
         hamburger.classList.remove('open');
         mobileNav.classList.remove('open');
+        mobileSubToggle.setAttribute('aria-expanded', 'false');
+        mobileSubMenu.classList.remove('open');
       });
     });
 

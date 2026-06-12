@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>協力隊拠点｜磐田市 地域おこし協力隊</title>
+  <meta name="description" content="磐田市 地域おこし協力隊の活動拠点をご紹介します。お気軽にお立ち寄りください。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .office-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+    .office-img-placeholder {
+      width: 100%;
+      height: 260px;
+      background: linear-gradient(135deg, var(--blue-light) 0%, #d0e8f7 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      color: var(--blue);
+    }
+    .office-body {
+      padding: 32px;
+    }
+    .office-name {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 8px;
+    }
+    .office-tag {
+      display: inline-block;
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      font-size: .78rem;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+    .office-info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .office-info-row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      font-size: .95rem;
+    }
+    .office-info-label {
+      font-weight: 700;
+      color: var(--gray-700);
+      min-width: 80px;
+      flex-shrink: 0;
+    }
+    .office-info-value {
+      color: var(--gray-700);
+      line-height: 1.7;
+    }
+    .map-frame {
+      width: 100%;
+      height: 360px;
+      border: none;
+      border-radius: var(--radius-md);
+      display: block;
+    }
+    .access-card {
+      background: var(--gray-50);
+      border-radius: var(--radius-md);
+      padding: 28px 32px;
+      border-left: 4px solid var(--blue);
+    }
+    .access-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--gray-900);
+      margin-bottom: 12px;
+    }
+    .access-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .access-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: .9rem;
+      color: var(--gray-700);
+    }
+    .access-icon {
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header class="site-header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">
+        磐田市 地域おこし協力隊
+        <span>Iwata City Regional Cooperation</span>
+      </a>
+      <nav class="nav-links">
+        <div class="nav-dropdown">
+          <a href="about.html" class="nav-dropdown-toggle">協力隊とは <span class="nav-caret">▾</span></a>
+          <div class="nav-dropdown-menu">
+            <a href="about.html">制度の説明</a>
+            <a href="activities.html">活動紹介</a>
+            <a href="office.html">協力隊拠点</a>
+          </div>
+        </div>
+        <a href="activities.html">活動紹介</a>
+        <a href="iju.html">移住情報</a>
+        <a href="akiya-bank.html">空き家バンク</a>
+        <a href="akiya-matching.html">マッチング</a>
+        <a href="faq.html">FAQ</a>
+        <a href="consult.html" class="nav-cta">移住相談</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- モバイルナビ -->
+  <nav class="mobile-nav" id="mobileNav">
+    <div class="mobile-sub-group">
+      <button class="mobile-sub-toggle" id="mobileSubToggle" aria-expanded="false">協力隊とは <span class="mobile-sub-caret">▾</span></button>
+      <div class="mobile-sub-menu" id="mobileSubMenu">
+        <a href="about.html">制度の説明</a>
+        <a href="activities.html">活動紹介</a>
+        <a href="office.html">協力隊拠点</a>
+      </div>
+    </div>
+    <a href="activities.html">活動紹介</a>
+    <a href="iju.html">移住情報</a>
+    <a href="akiya-bank.html">空き家バンク</a>
+    <a href="akiya-matching.html">マッチング</a>
+    <a href="faq.html">FAQ</a>
+    <a href="consult.html" class="nav-cta">移住相談はこちら</a>
+  </nav>
+
+  <main>
+
+    <!-- ページヒーロー -->
+    <div class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" style="padding-top: 0; margin-bottom: 20px;">
+          <a href="index.html">トップ</a>
+          <span>›</span>
+          <a href="about.html">協力隊とは</a>
+          <span>›</span>
+          <span>協力隊拠点</span>
+        </nav>
+        <h1 class="fade-up">協力隊拠点</h1>
+        <p class="fade-up">地域おこし協力隊の活動拠点をご紹介します。お気軽にお立ち寄りください。</p>
+      </div>
+    </div>
+
+    <!-- 拠点紹介 -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title fade-up">活動拠点のご案内</h2>
+        <p class="section-sub fade-up">移住相談や空き家情報のご案内も行っています</p>
+
+        <div class="office-card fade-up">
+          <div class="office-img-placeholder">🏢</div>
+          <div class="office-body">
+            <div class="office-tag">メイン拠点</div>
+            <div class="office-name">磐田市 地域おこし協力隊 活動拠点</div>
+            <div class="office-info-list">
+              <div class="office-info-row">
+                <span class="office-info-label">所在地</span>
+                <span class="office-info-value">〒438-0078<br>静岡県磐田市中泉112-1</span>
+              </div>
+              <div class="office-info-row">
+                <span class="office-info-label">開所時間</span>
+                <span class="office-info-value">平日 9:00 〜 17:00</span>
+              </div>
+              <div class="office-info-row">
+                <span class="office-info-label">休業日</span>
+                <span class="office-info-value">土・日・祝日、年末年始</span>
+              </div>
+              <div class="office-info-row">
+                <span class="office-info-label">電話</span>
+                <span class="office-info-value">0538-37-4851（磐田市建築住宅課）</span>
+              </div>
+              <div class="office-info-row">
+                <span class="office-info-label">メール</span>
+                <span class="office-info-value">kenchiku-jutaku@city.iwata.lg.jp</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- アクセス -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <h2 class="section-title fade-up">アクセス</h2>
+        <p class="section-sub fade-up">公共交通機関でのアクセスもお気軽にご利用ください</p>
+
+        <div style="display: grid; gap: 32px; grid-template-columns: 1fr 1fr;" class="fade-up">
+          <div>
+            <div class="access-card">
+              <div class="access-title">交通アクセス</div>
+              <div class="access-list">
+                <div class="access-item">
+                  <span class="access-icon">🚃</span>
+                  <span>JR東海道本線「磐田駅」より徒歩約10分</span>
+                </div>
+                <div class="access-item">
+                  <span class="access-icon">🚌</span>
+                  <span>遠鉄バス「市役所前」バス停より徒歩約3分</span>
+                </div>
+                <div class="access-item">
+                  <span class="access-icon">🚗</span>
+                  <span>東名高速「磐田IC」より約15分</span>
+                </div>
+                <div class="access-item">
+                  <span class="access-icon">🅿️</span>
+                  <span>市役所駐車場をご利用ください（無料）</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <iframe
+              class="map-frame"
+              src="https://maps.google.com/maps?q=静岡県磐田市中泉112-1&output=embed&hl=ja"
+              allowfullscreen
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="協力隊拠点 地図">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section cta-section">
+      <div class="container" style="text-align: center;">
+        <h2>移住・空き家についてのご相談は<br>お気軽にどうぞ</h2>
+        <p style="margin: 16px 0 32px;">拠点への来訪のほか、オンライン相談にも対応しています。</p>
+        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+          <a href="consult.html" class="btn btn-primary" style="font-size: 1.05rem; padding: 14px 36px;">移住相談フォームへ</a>
+          <a href="about.html" class="btn btn-secondary">制度の説明を見る</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- フッター -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo">磐田市 地域おこし協力隊</div>
+          <p class="footer-desc">移住・定住促進と空き家活用を通じて、磐田市の地域活性化に取り組んでいます。</p>
+        </div>
+        <div>
+          <div class="footer-heading">ページ一覧</div>
+          <ul class="footer-links">
+            <li><a href="about.html">地域おこし協力隊とは</a></li>
+            <li><a href="activities.html">活動紹介</a></li>
+            <li><a href="office.html">協力隊拠点</a></li>
+            <li><a href="iju.html">移住情報</a></li>
+            <li><a href="akiya-bank.html">空き家バンク</a></li>
+            <li><a href="akiya-matching.html">空き家マッチング</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">相談・お問い合わせ</div>
+          <ul class="footer-links">
+            <li><a href="consult.html">移住相談フォーム</a></li>
+            <li><a href="faq.html">よくある質問</a></li>
+            <li><a href="events.html">イベント・お知らせ</a></li>
+            <li><a href="voices.html">移住者の声</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 磐田市 地域おこし協力隊. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    const mobileSubToggle = document.getElementById('mobileSubToggle');
+    const mobileSubMenu = document.getElementById('mobileSubMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+      if (!mobileNav.classList.contains('open')) {
+        mobileSubToggle.setAttribute('aria-expanded', 'false');
+        mobileSubMenu.classList.remove('open');
+      }
+    });
+    mobileSubToggle.addEventListener('click', () => {
+      const expanded = mobileSubToggle.getAttribute('aria-expanded') === 'true';
+      mobileSubToggle.setAttribute('aria-expanded', String(!expanded));
+      mobileSubMenu.classList.toggle('open');
+    });
+    mobileNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileNav.classList.remove('open');
+        mobileSubToggle.setAttribute('aria-expanded', 'false');
+        mobileSubMenu.classList.remove('open');
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
