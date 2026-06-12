@@ -90,61 +90,12 @@
     }
     .fit-text { font-size: .95rem; color: var(--gray-700); line-height: 1.7; }
 
-    /* 待遇テーブル */
-    .conditions-grid {
+    /* 働き方4カード */
+    .conditions-cards-4 {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 20px;
     }
-    .condition-item {
-      background: var(--white);
-      border-radius: var(--radius-md);
-      border: 1px solid var(--gray-100);
-      box-shadow: var(--shadow-sm);
-      padding: 24px;
-    }
-    .condition-label {
-      font-size: .75rem;
-      font-weight: 700;
-      color: var(--blue);
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .condition-value {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--gray-900);
-      margin-bottom: 4px;
-      font-family: 'Noto Serif JP', serif;
-    }
-    .condition-note {
-      font-size: .82rem;
-      color: var(--gray-500);
-      line-height: 1.6;
-    }
-
-    /* 活動費補助テーブル */
-    .subsidy-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: .9rem;
-      margin-top: 24px;
-    }
-    .subsidy-table th, .subsidy-table td {
-      padding: 12px 16px;
-      text-align: left;
-      border-bottom: 1px solid var(--gray-100);
-    }
-    .subsidy-table thead th {
-      background: var(--blue-light);
-      color: var(--blue-dark);
-      font-size: .8rem;
-      font-weight: 700;
-      letter-spacing: .05em;
-    }
-    .subsidy-table tbody tr:hover { background: var(--gray-50); }
-    .subsidy-table td:last-child { font-weight: 600; color: var(--blue-dark); text-align: right; }
 
     /* キャリア */
     .career-flow {
@@ -240,7 +191,7 @@
     .recruit-cta p  { max-width: 520px; margin: 0 auto 32px; color: var(--gray-700); }
 
     @media (max-width: 768px) {
-      .conditions-grid { grid-template-columns: 1fr; }
+      .conditions-cards-4 { grid-template-columns: repeat(2, 1fr); }
       .career-flow { flex-direction: column; gap: 8px; }
       .career-step { border-radius: var(--radius-md) !important; margin-left: 0 !important; }
       .career-arrow { transform: rotate(90deg); padding: 0; }
@@ -409,116 +360,32 @@
         <h2 class="section-title fade-up">磐田市での働き方・待遇</h2>
         <p class="section-sub fade-up">隊員が安心して活動できるよう、市がサポートします</p>
 
-        <div class="conditions-grid fade-up">
+        <div class="conditions-cards-4">
 
-          <div class="condition-item">
-            <div class="condition-label">身分・雇用形態</div>
-            <div class="condition-value">委嘱・委託契約</div>
-            <div class="condition-note">雇用関係なし。隊員の自由な活動を確保するため、磐田市では委嘱または委託契約により任用しています。</div>
+          <div class="appeal-card fade-up">
+            <div class="appeal-icon">📋</div>
+            <div class="appeal-title">雇用関係は委嘱契約で副業可能</div>
+            <div class="appeal-desc">磐田市では委嘱契約により任用するため雇用関係はありません。公序良俗に反せず活動に支障がない範囲で副業も認められます。</div>
           </div>
 
-          <div class="condition-item">
-            <div class="condition-label">任期</div>
-            <div class="condition-value">最長3年間</div>
-            <div class="condition-note">おおむね1〜3年。年度単位で更新します（活動状況により判断）。</div>
+          <div class="appeal-card fade-up">
+            <div class="appeal-icon">🏠</div>
+            <div class="appeal-title">住民票を移動できることが条件</div>
+            <div class="appeal-desc">三大都市圏など都市地域から過疎地域等へ移住することが前提です。すでに磐田市に住民票がある方は対象外となります。</div>
           </div>
 
-          <div class="condition-item">
-            <div class="condition-label">活動日数・時間</div>
-            <div class="condition-value">週5日・7時間45分</div>
-            <div class="condition-note">夜間・週末の活動がある場合は適宜振り替えます。</div>
+          <div class="appeal-card fade-up">
+            <div class="appeal-icon">📍</div>
+            <div class="appeal-title">磐田市内に住民票を移動できることが条件</div>
+            <div class="appeal-desc">任期中は磐田市内に居住し、住民票を移すことが必要です。活動拠点として磐田に根ざした暮らしを送っていただきます。</div>
           </div>
 
-          <div class="condition-item">
-            <div class="condition-label">報償費（月額）</div>
-            <div class="condition-value">291,000円</div>
-            <div class="condition-note">源泉徴収後の手取り額は241,000円。毎月第3木曜日に支払い。</div>
+          <div class="appeal-card fade-up">
+            <div class="appeal-icon">💰</div>
+            <div class="appeal-title">家賃補助や起業支援補助金もあり</div>
+            <div class="appeal-desc">家賃は月額5万円まで活動費補助から支援。任期後の起業・独立に向けた支援補助金など、充実したサポート体制があります。</div>
           </div>
 
-          <div class="condition-item">
-            <div class="condition-label">活動拠点</div>
-            <div class="condition-value">自宅・本庁舎地下</div>
-            <div class="condition-note">自宅等が活動拠点となりますが、市の本庁舎地下スペースも利用可能。市外研修もあり。</div>
-          </div>
-
-          <div class="condition-item">
-            <div class="condition-label">副業</div>
-            <div class="condition-value">条件付きで可</div>
-            <div class="condition-note">公序良俗に反せず、活動に支障をきたさない場合に限り認められます。ただし市への事前報告が必要です。</div>
-          </div>
-
-          <div class="condition-item">
-            <div class="condition-label">住居</div>
-            <div class="condition-value">自己手配・自己負担</div>
-            <div class="condition-note">住居はご自身でご契約。光熱水費等も自己負担ですが、家賃は活動費補助（月額5万円まで）から支援可能です。</div>
-          </div>
-
-          <div class="condition-item">
-            <div class="condition-label">社会保険・年金</div>
-            <div class="condition-value">自己負担</div>
-            <div class="condition-note">国民健康保険・国民年金への加入は自己負担となります。</div>
-          </div>
-
-        </div>
-
-        <!-- 活動費補助 -->
-        <div style="margin-top: 48px;">
-          <h3 class="fade-up" style="text-align: center; margin-bottom: 8px;">活動費補助　年間最大200万円</h3>
-          <p class="fade-up" style="text-align: center; color: var(--gray-500); font-size: .9rem; margin-bottom: 24px;">活動に必要な経費を市が補助します</p>
-          <div class="fade-up" style="overflow-x: auto;">
-            <table class="subsidy-table">
-              <thead>
-                <tr>
-                  <th>補助対象</th>
-                  <th>内容</th>
-                  <th>上限額</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>住宅借上げ</td>
-                  <td>活動拠点となる住宅の家賃</td>
-                  <td>月額 50,000円</td>
-                </tr>
-                <tr>
-                  <td>活動車両借上げ</td>
-                  <td>リース車または自家用車（自家用車は一律）</td>
-                  <td>月額 25,000円</td>
-                </tr>
-                <tr>
-                  <td>車両燃料費</td>
-                  <td>活動用車両のガソリン代等</td>
-                  <td>月額 10,000円</td>
-                </tr>
-                <tr>
-                  <td>活動旅費</td>
-                  <td>移動に要する交通費等</td>
-                  <td>上限なし</td>
-                </tr>
-                <tr>
-                  <td>消耗品・道具等</td>
-                  <td>作業道具、消耗品等の購入または借上げ</td>
-                  <td>上限なし</td>
-                </tr>
-                <tr>
-                  <td>イベント・交流会</td>
-                  <td>関係者との意見交換会・活動報告会等（講師料あり）</td>
-                  <td>上限なし</td>
-                </tr>
-                <tr>
-                  <td>研修・資格取得</td>
-                  <td>定住に向けて必要な研修・資格取得費用（振込手数料含む）</td>
-                  <td>上限なし</td>
-                </tr>
-                <tr>
-                  <td>その他</td>
-                  <td>市長が活動に必要と認める経費</td>
-                  <td>要相談</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="fade-up" style="font-size: .82rem; color: var(--gray-500); margin-top: 12px;">※補助金交付の対象になるか、事前に市担当者へご相談ください。経費を支出した際の領収書は必ず保管してください。</p>
         </div>
       </div>
     </section>
