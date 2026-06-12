@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>移住情報｜磐田市 地域おこし協力隊</title>
+  <meta name="description" content="磐田市への移住情報をご紹介。エリア特徴・生活・仕事・子育てまで、移住コーディネーターがサポートします。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ===== コーディネーター紹介 ===== */
+    .coordinator-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+    }
+    .coordinator-photo {
+      background: linear-gradient(160deg, var(--blue-light) 0%, #c8e3f5 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 32px;
+      gap: 16px;
+    }
+    .coordinator-avatar {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 4px solid var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      overflow: hidden;
+    }
+    .coordinator-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .coordinator-photo-name {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--blue-dark);
+      text-align: center;
+    }
+    .coordinator-photo-role {
+      font-size: .82rem;
+      color: var(--blue);
+      font-weight: 600;
+      background: var(--white);
+      padding: 4px 14px;
+      border-radius: 100px;
+    }
+    .coordinator-body {
+      padding: 48px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .coordinator-label {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      color: var(--blue);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .coordinator-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+      font-weight: 700;
+      color: var(--gray-900);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    .coordinator-msg {
+      font-size: .97rem;
+      color: var(--gray-700);
+      line-height: 2;
+      margin-bottom: 28px;
+    }
+    .coordinator-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-top: 24px;
+      border-top: 1px solid var(--gray-100);
+    }
+    .coordinator-meta-row {
+      display: flex;
+      gap: 12px;
+      font-size: .875rem;
+    }
+    .coordinator-meta-key {
+      font-weight: 700;
+      color: var(--gray-700);
+      min-width: 80px;
+      flex-shrink: 0;
+    }
+    .coordinator-meta-val {
+      color: var(--gray-700);
+    }
+
+    /* ===== エリアカード ===== */
+    .area-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 16px;
+    }
+    .area-grid-bottom {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: calc(66.6% + 10px);
+    }
+    .area-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-100);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .area-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .area-img {
+      width: 100%;
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+    }
+    .area-img-toyooka { background: linear-gradient(135deg, #d4edda, #a8d8b0); }
+    .area-img-toyota  { background: linear-gradient(135deg, #e8f4e8, #c5e4c9); }
+    .area-img-iwata   { background: linear-gradient(135deg, var(--blue-light), #c8e3f5); }
+    .area-img-ryuyo   { background: linear-gradient(135deg, #fff3cd, #ffe69c); }
+    .area-img-fukuda  { background: linear-gradient(135deg, #cce5ff, #99caff); }
+    .area-body {
+      padding: 20px;
+    }
+    .area-name {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 4px;
+    }
+    .area-kana {
+      font-size: .75rem;
+      color: var(--gray-500);
+      margin-bottom: 10px;
+    }
+    .area-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .area-desc {
+      font-size: .875rem;
+      color: var(--gray-700);
+      line-height: 1.7;
+    }
+    .area-points {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .area-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: .82rem;
+      color: var(--gray-700);
+    }
+    .area-point::before {
+      content: '•';
+      color: var(--blue);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ===== 情報カード ===== */
+    .info-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-100);
+      box-shadow: var(--shadow-sm);
+      padding: 28px 24px;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .info-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .info-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 14px;
+    }
+    .info-icon-blue  { background: var(--blue-light); }
+    .info-icon-green { background: var(--green-light); }
+    .info-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 8px;
+    }
+    .info-desc {
+      font-size: .875rem;
+      color: var(--gray-700);
+      line-height: 1.8;
+    }
+    .info-list {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .info-list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: .82rem;
+      color: var(--gray-700);
+    }
+    .info-list-item::before {
+      content: '✓';
+      color: var(--green);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ===== セクション見出し（左ライン） ===== */
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .section-eyebrow::before {
+      content: '';
+      width: 20px;
+      height: 2px;
+      background: var(--blue);
+      border-radius: 1px;
+    }
+
+    /* ===== まち巡り相談バナー ===== */
+    .machimeguri-banner {
+      background: linear-gradient(135deg, #fff8e6 0%, #fffaf0 100%);
+      border: 2px solid #f0c040;
+      border-radius: var(--radius-lg);
+      padding: 36px 40px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 28px;
+      align-items: center;
+    }
+    .machimeguri-icon {
+      font-size: 3rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .machimeguri-label {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: #b8860b;
+      margin-bottom: 6px;
+    }
+    .machimeguri-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 10px;
+    }
+    .machimeguri-desc {
+      font-size: .9rem;
+      color: var(--gray-700);
+      line-height: 1.8;
+      margin: 0;
+    }
+    .machimeguri-cta { flex-shrink: 0; }
+
+    /* ===== 移住支援バナー ===== */
+    .support-banner {
+      background: linear-gradient(135deg, var(--blue-dark) 0%, #1a4d7a 100%);
+      border-radius: var(--radius-lg);
+      padding: 40px 48px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 32px;
+      align-items: center;
+      color: var(--white);
+    }
+    .support-banner h3 {
+      color: var(--white);
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+    }
+    .support-banner p {
+      color: rgba(255,255,255,.8);
+      font-size: .9rem;
+      margin: 0;
+    }
+
+    @media (max-width: 900px) {
+      .coordinator-card { grid-template-columns: 1fr; }
+      .coordinator-photo { padding: 36px 24px; }
+      .coordinator-body { padding: 32px 28px; }
+      .area-grid { grid-template-columns: repeat(2, 1fr); }
+      .area-grid-bottom { grid-template-columns: 1fr; max-width: 100%; }
+      .support-banner { grid-template-columns: 1fr; }
+      .machimeguri-banner { grid-template-columns: 1fr; text-align: center; padding: 28px 24px; gap: 16px; }
+      .machimeguri-icon { font-size: 2.4rem; }
+      .machimeguri-cta { display: flex; justify-content: center; }
+    }
+    @media (max-width: 640px) {
+      .area-grid { grid-template-columns: 1fr; }
+      .coordinator-avatar { width: 120px; height: 120px; font-size: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header class="site-header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">
+        磐田市 地域おこし協力隊
+        <span>Iwata City Regional Cooperation</span>
+      </a>
+      <nav class="nav-links">
+        <div class="nav-dropdown">
+          <a href="about.html" class="nav-dropdown-toggle">協力隊とは <span class="nav-caret">▾</span></a>
+          <div class="nav-dropdown-menu">
+            <a href="about.html">制度の説明</a>
+            <a href="activities.html">活動紹介</a>
+            <a href="office.html">協力隊拠点</a>
+          </div>
+        </div>
+        <a href="activities.html">活動紹介</a>
+        <a href="iju.html" style="color:var(--blue);font-weight:700;">移住情報</a>
+        <a href="akiya-bank.html">空き家バンク</a>
+        <a href="akiya-matching.html">マッチング</a>
+        <a href="faq.html">FAQ</a>
+        <a href="consult.html" class="nav-cta">移住相談</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- モバイルナビ -->
+  <nav class="mobile-nav" id="mobileNav">
+    <div class="mobile-sub-group">
+      <button class="mobile-sub-toggle" id="mobileSubToggle" aria-expanded="false">協力隊とは <span class="mobile-sub-caret">▾</span></button>
+      <div class="mobile-sub-menu" id="mobileSubMenu">
+        <a href="about.html">制度の説明</a>
+        <a href="activities.html">活動紹介</a>
+        <a href="office.html">協力隊拠点</a>
+      </div>
+    </div>
+    <a href="activities.html">活動紹介</a>
+    <a href="iju.html">移住情報</a>
+    <a href="akiya-bank.html">空き家バンク</a>
+    <a href="akiya-matching.html">マッチング</a>
+    <a href="faq.html">FAQ</a>
+    <a href="consult.html" class="nav-cta">移住相談はこちら</a>
+  </nav>
+
+  <main>
+
+    <!-- ページヒーロー -->
+    <div class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" style="padding-top: 0; margin-bottom: 20px;">
+          <a href="index.html">トップ</a>
+          <span>›</span>
+          <span>移住情報</span>
+        </nav>
+        <h1 class="fade-up">磐田市への移住情報</h1>
+        <p class="fade-up">気候温暖な静岡県磐田市で、新しい暮らしをはじめませんか。<br>移住コーディネーターが、あなたに合った暮らし方をご提案します。</p>
+      </div>
+    </div>
+
+    <!-- ===== 移住コーディネーター紹介 ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-eyebrow fade-up">Coordinator</div>
+        <h2 class="section-title fade-up" style="text-align:left; margin-bottom: 32px;">担当コーディネーター</h2>
+
+        <div class="coordinator-card fade-up">
+          <div class="coordinator-photo">
+            <div class="coordinator-avatar">
+              <!-- 写真があれば <img src="img/tao.jpg" alt="田尾さん"> に変更 -->
+              👤
+            </div>
+            <div class="coordinator-photo-name">田尾 さん</div>
+            <div class="coordinator-photo-role">移住コーディネーター</div>
+          </div>
+          <div class="coordinator-body">
+            <div class="coordinator-label">移住コーディネーター紹介</div>
+            <h2 class="coordinator-title">磐田での暮らし、<br>一緒に探しましょう。</h2>
+            <p class="coordinator-msg">
+              こんにちは、地域おこし協力隊の移住コーディネーターを担当しています田尾です。<br>
+              私自身も移住者として磐田市に来て、この土地の魅力をたくさん感じてきました。
+              温暖な気候、豊かな自然、そして温かい人たちとのつながり。<br><br>
+              「どんなエリアが合っているか」「仕事はどう探すか」「子育て環境は？」など、
+              移住前の不安や疑問は人それぞれです。オンライン相談もお受けしていますので、
+              まずは気軽にご連絡ください。一緒に磐田での暮らしを描いていきましょう。
+            </p>
+            <div class="coordinator-meta">
+              <div class="coordinator-meta-row">
+                <span class="coordinator-meta-key">担当エリア</span>
+                <span class="coordinator-meta-val">磐田市全域（豊岡・豊田・磐田・竜洋・福田）</span>
+              </div>
+              <div class="coordinator-meta-row">
+                <span class="coordinator-meta-key">対応方法</span>
+                <span class="coordinator-meta-val">対面相談・オンライン相談・メール相談</span>
+              </div>
+              <div class="coordinator-meta-row">
+                <span class="coordinator-meta-key">相談受付</span>
+                <span class="coordinator-meta-val">平日 9:00〜17:00（事前予約制）</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 28px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;" class="fade-up">
+          <a href="consult.html" class="btn btn-primary" style="font-size: 1rem; padding: 14px 40px;">田尾さんに移住相談する</a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjnPSsXD7-USCKDAedRBB_Z4hj2Y9P7rtaeewaqhwbe43Ufw/viewform?usp=header" target="_blank" rel="noopener" class="btn btn-secondary" style="font-size: 1rem; padding: 14px 40px;">まち巡り相談はこちら</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== まち巡り相談 ===== -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="machimeguri-banner fade-up">
+          <div class="machimeguri-icon">🗺️</div>
+          <div class="machimeguri-body">
+            <div class="machimeguri-label">MACHI MEGURI SOUDAN</div>
+            <h3 class="machimeguri-title">まち巡りご相談</h3>
+            <p class="machimeguri-desc">
+              磐田市へ移住を検討されている方向けの「まち巡りご相談」申込フォームです。<br>
+              移住に関するご希望や気になることを事前にお伺いし、お一人おひとりに合わせたコースをご案内いたします。
+            </p>
+          </div>
+          <div class="machimeguri-cta">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjnPSsXD7-USCKDAedRBB_Z4hj2Y9P7rtaeewaqhwbe43Ufw/viewform?usp=header" target="_blank" rel="noopener" class="btn btn-primary" style="white-space: nowrap; padding: 14px 32px;">まち巡り相談はこちら</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== エリア紹介 ===== -->
+    <section class="section" style="background: var(--gray-50);">
+      <div class="container">
+        <div class="section-eyebrow fade-up">Area Guide</div>
+        <h2 class="section-title fade-up">磐田市のエリアを知る</h2>
+        <p class="section-sub fade-up">磐田市は自然・市街地・海沿いと多彩なエリアで構成されています。暮らし方に合ったエリアを見つけてください。</p>
+
+        <div class="area-grid fade-up">
+
+          <!-- 豊岡 -->
+          <div class="area-card">
+            <div class="area-img area-img-toyooka">🌲</div>
+            <div class="area-body">
+              <div class="area-name">豊岡エリア</div>
+              <div class="area-kana">TOYOOKA</div>
+              <div class="area-tags">
+                <span class="tag tag-green">山・自然</span>
+                <span class="tag tag-green">農業</span>
+                <span class="tag">静かな暮らし</span>
+              </div>
+              <p class="area-desc">市北部の山間エリア。天竜川や緑豊かな山並みに囲まれた自然環境が魅力。農業やアウトドアが好きな方に人気があります。</p>
+              <div class="area-points">
+                <div class="area-point">農地・古民家物件が比較的多い</div>
+                <div class="area-point">天竜川沿いの豊かな自然環境</div>
+                <div class="area-point">静かでのどかな田舎暮らし</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 豊田 -->
+          <div class="area-card">
+            <div class="area-img area-img-toyota">🍵</div>
+            <div class="area-body">
+              <div class="area-name">豊田エリア</div>
+              <div class="area-kana">TOYOTA</div>
+              <div class="area-tags">
+                <span class="tag tag-green">茶畑</span>
+                <span class="tag tag-green">農業</span>
+                <span class="tag">田園風景</span>
+              </div>
+              <p class="area-desc">茶畑と田園風景が広がる農業の盛んなエリア。静かな田舎暮らしを望む方や農業に挑戦したい方に適した地域です。</p>
+              <div class="area-points">
+                <div class="area-point">お茶の産地、農業体験の機会豊富</div>
+                <div class="area-point">落ち着いた田園環境</div>
+                <div class="area-point">農地付き物件の取得相談が可能</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 磐田 -->
+          <div class="area-card">
+            <div class="area-img area-img-iwata">🏙️</div>
+            <div class="area-body">
+              <div class="area-name">磐田エリア</div>
+              <div class="area-kana">IWATA</div>
+              <div class="area-tags">
+                <span class="tag">市街地</span>
+                <span class="tag">交通便利</span>
+                <span class="tag">商業施設</span>
+              </div>
+              <p class="area-desc">JR磐田駅を中心とした市の中心エリア。商業施設・医療機関・学校など生活インフラが充実しており、最も利便性が高い地域です。</p>
+              <div class="area-points">
+                <div class="area-point">JR東海道本線「磐田駅」徒歩圏</div>
+                <div class="area-point">ショッピングモール・病院が充実</div>
+                <div class="area-point">子育て世代にも安心の生活環境</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="area-grid-bottom fade-up" style="margin: 0 auto;">
+
+          <!-- 竜洋 -->
+          <div class="area-card">
+            <div class="area-img area-img-ryuyo">🌾</div>
+            <div class="area-body">
+              <div class="area-name">竜洋エリア</div>
+              <div class="area-kana">RYUYO</div>
+              <div class="area-tags">
+                <span class="tag tag-green">農業</span>
+                <span class="tag">温暖な気候</span>
+                <span class="tag">海まで近い</span>
+              </div>
+              <p class="area-desc">遠州灘に近く温暖な気候が特徴。農業が盛んで野菜・果物の産地として知られています。海と農のある暮らしが実現できるエリアです。</p>
+              <div class="area-points">
+                <div class="area-point">遠州灘まで車で10分圏内</div>
+                <div class="area-point">温暖で農作物の生育に最適</div>
+                <div class="area-point">のどかな農村風景</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 福田 -->
+          <div class="area-card">
+            <div class="area-img area-img-fukuda">🌊</div>
+            <div class="area-body">
+              <div class="area-name">福田エリア</div>
+              <div class="area-kana">FUKUDA</div>
+              <div class="area-tags">
+                <span class="tag" style="background:#cce5ff;color:#0056b3;">海・漁業</span>
+                <span class="tag tag-green">農業</span>
+                <span class="tag">自然豊か</span>
+              </div>
+              <p class="area-desc">遠州灘に面した海沿いのエリア。漁業が盛んで、新鮮な海の幸が身近にある暮らしが魅力。海好きの方や自然の中での生活を求める方に人気です。</p>
+              <div class="area-points">
+                <div class="area-point">遠州灘の海岸線が徒歩圏内</div>
+                <div class="area-point">新鮮な魚介類が手に入りやすい</div>
+                <div class="area-point">サーフィン等マリンスポーツも盛ん</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 生活情報 ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-eyebrow fade-up">Life</div>
+        <h2 class="section-title fade-up">生活に関する情報</h2>
+        <p class="section-sub fade-up">磐田市での日々の暮らしに必要な情報をまとめました</p>
+
+        <div class="grid-3 fade-up">
+
+          <div class="info-card">
+            <div class="info-icon info-icon-blue">🏥</div>
+            <div class="info-title">医療・福祉</div>
+            <p class="info-desc">市内に総合病院・クリニックが揃い、医療環境が整っています。</p>
+            <div class="info-list">
+              <div class="info-list-item">磐田市立総合病院（二次救急対応）</div>
+              <div class="info-list-item">市内に多数のクリニック・歯科</div>
+              <div class="info-list-item">介護・福祉施設も充実</div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon info-icon-blue">🚃</div>
+            <div class="info-title">交通アクセス</div>
+            <p class="info-desc">JR東海道本線が通り、浜松・静岡へのアクセスも良好です。</p>
+            <div class="info-list">
+              <div class="info-list-item">JR磐田駅〜浜松駅：約10分</div>
+              <div class="info-list-item">JR磐田駅〜静岡駅：約50分</div>
+              <div class="info-list-item">東名高速「磐田IC」利用可</div>
+              <div class="info-list-item">市内バス路線・デマンドタクシーあり</div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon info-icon-blue">🛒</div>
+            <div class="info-title">買い物・生活施設</div>
+            <p class="info-desc">大型商業施設が市内に複数あり、日常の買い物に困りません。</p>
+            <div class="info-list">
+              <div class="info-list-item">ショッピングモール・ホームセンター</div>
+              <div class="info-list-item">スーパー・ドラッグストアが各所に</div>
+              <div class="info-list-item">地元農産物の直売所も豊富</div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon info-icon-green">🌤️</div>
+            <div class="info-title">気候・自然環境</div>
+            <p class="info-desc">年間を通じて温暖で過ごしやすい遠州地方の気候。</p>
+            <div class="info-list">
+              <div class="info-list-item">年間平均気温約16〜17℃</div>
+              <div class="info-list-item">積雪はほぼなく冬も比較的温暖</div>
+              <div class="info-list-item">天竜川・遠州灘など自然が身近</div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon info-icon-green">🏘️</div>
+            <div class="info-title">住まい・空き家情報</div>
+            <p class="info-desc">市の空き家バンクを通じて、リーズナブルな物件を探せます。</p>
+            <div class="info-list">
+              <div class="info-list-item">空き家バンク登録物件多数</div>
+              <div class="info-list-item">リフォーム補助金制度あり</div>
+              <div class="info-list-item">農地付き古民家の相談も可能</div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon info-icon-green">💴</div>
+            <div class="info-title">移住支援制度</div>
+            <p class="info-desc">磐田市独自の移住支援・補助金制度が充実しています。</p>
+            <div class="info-list">
+              <div class="info-list-item">移住支援金（条件付き）</div>
+              <div class="info-list-item">住宅取得・改修補助</div>
+              <div class="info-list-item">引越し費用助成制度</div>
+              <div class="info-list-item">移住お試し住宅の利用可</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 仕事情報 ===== -->
+    <section class="section" style="background: var(--gray-50);">
+      <div class="container">
+        <div class="section-eyebrow fade-up">Work</div>
+        <h2 class="section-title fade-up">仕事に関する情報</h2>
+        <p class="section-sub fade-up">磐田市では多様な働き方が可能です。農業・製造業・起業まで幅広く支援しています</p>
+
+        <div class="grid-3 fade-up">
+
+          <div class="info-card">
+            <div class="info-icon info-icon-green">🌾</div>
+            <div class="info-title">農業・就農支援</div>
+            <p class="info-desc">農業への新規参入を手厚くサポート。研修制度から農地確保まで一貫支援。</p>
+            <div class="info-list">
+              <div class="info-list-item">新規就農者研修（農業委員会）</div>
+              <div class="info-list-item">農地マッチング支援</div>
+              <div class="info-list-item">就農奨励金・農業機械補助</div>
+              <div class="info-list-item">先輩農家によるメンター制度</div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon info-icon-blue">🏭</div>
+            <div class="info-title">製造業・工場</div>
+            <p class="info-desc">ヤマハ発動機など大手メーカーの工場があり、製造業の雇用が豊富。</p>
+            <div class="info-list">
+              <div class="info-list-item">ヤマハ発動機グループ関連企業</div>
+              <div class="info-list-item">輸送機器・電子部品メーカー多数</div>
+              <div class="info-list-item">技術者・エンジニア求人も充実</div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon info-icon-blue">💼</div>
+            <div class="info-title">就職・転職支援</div>
+            <p class="info-desc">移住者向けの就職相談窓口があり、市内企業とのマッチングをサポート。</p>
+            <div class="info-list">
+              <div class="info-list-item">移住者向け就職相談会（年数回）</div>
+              <div class="info-list-item">しずおか就職情報センター連携</div>
+              <div class="info-list-item">地元中小企業の求人紹介</div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon info-icon-green">🖥️</div>
+            <div class="info-title">テレワーク・リモートワーク</div>
+            <p class="info-desc">市内にコワーキングスペースがあり、都市部の仕事を続けながら移住も可能。</p>
+            <div class="info-list">
+              <div class="info-list-item">市内コワーキングスペース利用可</div>
+              <div class="info-list-item">光ブロードバンド環境が整備</div>
+              <div class="info-list-item">テレワーク移住相談対応</div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon info-icon-green">🚀</div>
+            <div class="info-title">起業・開業支援</div>
+            <p class="info-desc">地域資源を活かした起業や、飲食・小売業の開業を積極支援。</p>
+            <div class="info-list">
+              <div class="info-list-item">創業支援補助金（最大50万円）</div>
+              <div class="info-list-item">ビジネス相談窓口（商工会議所）</div>
+              <div class="info-list-item">空き店舗改修補助制度</div>
+              <div class="info-list-item">先輩起業家とのマッチング</div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon info-icon-blue">🎣</div>
+            <div class="info-title">漁業・一次産業</div>
+            <p class="info-desc">遠州灘に面した福田港を中心に漁業が盛ん。漁師見習いの受け入れも。</p>
+            <div class="info-list">
+              <div class="info-list-item">漁業就業支援フェア参加可</div>
+              <div class="info-list-item">漁師体験・見学プログラム</div>
+              <div class="info-list-item">海と農のデュアルライフも実現可</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 子育て・教育 ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-eyebrow fade-up">Child & Education</div>
+        <h2 class="section-title fade-up">子育て・教育に関する情報</h2>
+        <p class="section-sub fade-up">磐田市は子育て世代を積極支援。充実した教育環境で子どもたちが育ちます</p>
+
+        <div class="grid-3 fade-up">
+
+          <div class="info-card">
+            <div class="info-icon info-icon-blue">🏫</div>
+            <div class="info-title">保育・幼稚園</div>
+            <p class="info-desc">市内に公立・私立の保育所・幼稚園が充実。待機児童の解消に取り組んでいます。</p>
+            <div class="info-list">
+              <div class="info-list-item">認可保育所・認定こども園多数</div>
+              <div class="info-list-item">0歳から預けられる施設あり</div>
+              <div class="info-list-item">病児保育・一時保育も対応</div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon info-icon-blue">📚</div>
+            <div class="info-title">小・中学校</div>
+            <p class="info-desc">市内に小学校・中学校が複数あり、地域に密着した教育が受けられます。</p>
+            <div class="info-list">
+              <div class="info-list-item">市立小学校・中学校が各所に</div>
+              <div class="info-list-item">英語教育・ICT教育を積極推進</div>
+              <div class="info-list-item">放課後子ども教室の運営</div>
+              <div class="info-list-item">通学バス・スクールバス制度あり</div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon info-icon-green">💰</div>
+            <div class="info-title">子育て支援制度</div>
+            <p class="info-desc">移住家族への子育て支援が手厚く、経済的な安心感が持てます。</p>
+            <div class="info-list">
+              <div class="info-list-item">子ども医療費無料（18歳まで）</div>
+              <div class="info-list-item">多子世帯への保育料軽減</div>
+              <div class="info-list-item">移住支援金の子ども加算あり</div>
+              <div class="info-list-item">ひとり親世帯への別途支援</div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon info-icon-green">⚽</div>
+            <div class="info-title">スポーツ・課外活動</div>
+            <p class="info-desc">ジュビロ磐田のホームタウン。スポーツを通じた子どもの育ちを応援。</p>
+            <div class="info-list">
+              <div class="info-list-item">ジュビロ磐田スクール・イベント</div>
+              <div class="info-list-item">市内スポーツ施設が充実</div>
+              <div class="info-list-item">地域スポーツクラブが多数</div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon info-icon-blue">🎨</div>
+            <div class="info-title">学習・習い事環境</div>
+            <p class="info-desc">学習塾・音楽・スポーツなど、子どもの興味に合わせた習い事が揃います。</p>
+            <div class="info-list">
+              <div class="info-list-item">市内に学習塾・英会話教室多数</div>
+              <div class="info-list-item">市民文化会館での各種教室</div>
+              <div class="info-list-item">図書館・図書室の充実した蔵書</div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon info-icon-green">🌿</div>
+            <div class="info-title">自然体験・農業体験</div>
+            <p class="info-desc">田んぼや農園が身近にあり、食育・自然体験が日常的にできる環境です。</p>
+            <div class="info-list">
+              <div class="info-list-item">田植え・収穫体験イベント</div>
+              <div class="info-list-item">天竜川での川遊び・キャンプ</div>
+              <div class="info-list-item">地域の農家との交流機会</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 支援バナー ===== -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="support-banner fade-up">
+          <div>
+            <h3>移住支援金・補助金の詳細はお問い合わせを</h3>
+            <p>移住支援金・住宅補助・子育て加算など制度内容は変更になる場合があります。最新情報は移住コーディネーターまでお気軽にご確認ください。</p>
+          </div>
+          <div style="flex-shrink: 0;">
+            <a href="consult.html" class="btn" style="background:var(--white);color:var(--blue-dark);font-weight:700;white-space:nowrap;">相談・問い合わせ</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="section" style="background: linear-gradient(135deg, var(--blue-light), var(--green-light)); padding-top: clamp(48px,8vw,80px); padding-bottom: clamp(48px,8vw,80px);">
+      <div class="container" style="text-align: center;">
+        <h2 class="fade-up">磐田市への移住、<br>まずはご相談ください</h2>
+        <p class="fade-up" style="max-width: 520px; margin: 16px auto 32px;">移住コーディネーターの田尾がご状況に合わせてご案内します。オンライン相談も歓迎です。</p>
+        <div class="fade-up" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+          <a href="consult.html" class="btn btn-primary" style="font-size: 1.05rem; padding: 14px 40px;">移住相談フォームへ</a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjnPSsXD7-USCKDAedRBB_Z4hj2Y9P7rtaeewaqhwbe43Ufw/viewform?usp=header" target="_blank" rel="noopener" class="btn btn-secondary" style="font-size: 1.05rem; padding: 14px 40px;">まち巡り相談はこちら</a>
+          <a href="akiya-bank.html" class="btn btn-secondary">空き家バンクを見る</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- フッター -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo">磐田市 地域おこし協力隊</div>
+          <p class="footer-desc">移住・定住促進と空き家活用を通じて、磐田市の地域活性化に取り組んでいます。</p>
+        </div>
+        <div>
+          <div class="footer-heading">ページ一覧</div>
+          <ul class="footer-links">
+            <li><a href="about.html">地域おこし協力隊とは</a></li>
+            <li><a href="activities.html">活動紹介</a></li>
+            <li><a href="iju.html">移住情報</a></li>
+            <li><a href="akiya-bank.html">空き家バンク</a></li>
+            <li><a href="akiya-matching.html">空き家マッチング</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">相談・お問い合わせ</div>
+          <ul class="footer-links">
+            <li><a href="consult.html">移住相談フォーム</a></li>
+            <li><a href="faq.html">よくある質問</a></li>
+            <li><a href="events.html">イベント・お知らせ</a></li>
+            <li><a href="voices.html">移住者の声</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 磐田市 地域おこし協力隊. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    const mobileSubToggle = document.getElementById('mobileSubToggle');
+    const mobileSubMenu = document.getElementById('mobileSubMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+      if (!mobileNav.classList.contains('open')) {
+        mobileSubToggle.setAttribute('aria-expanded', 'false');
+        mobileSubMenu.classList.remove('open');
+      }
+    });
+    mobileSubToggle.addEventListener('click', () => {
+      const expanded = mobileSubToggle.getAttribute('aria-expanded') === 'true';
+      mobileSubToggle.setAttribute('aria-expanded', String(!expanded));
+      mobileSubMenu.classList.toggle('open');
+    });
+    mobileNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileNav.classList.remove('open');
+        mobileSubToggle.setAttribute('aria-expanded', 'false');
+        mobileSubMenu.classList.remove('open');
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
