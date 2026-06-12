@@ -90,11 +90,44 @@
     }
     .fit-text { font-size: .95rem; color: var(--gray-700); line-height: 1.7; }
 
-    /* 働き方4カード */
-    .conditions-cards-4 {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+    /* 働き方リスト（室戸スタイル） */
+    .works-list {
+      counter-reset: works-count;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .works-list-sec {
+      counter-increment: works-count;
+      padding: 44px 0;
+      text-align: center;
+    }
+    .works-list-sec + .works-list-sec {
+      border-top: 1px solid rgba(83, 168, 213, .3);
+    }
+    .works-list-num {
+      display: block;
+      font-size: .72rem;
+      letter-spacing: .18em;
+      color: var(--blue);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .works-list-num::before {
+      content: counter(works-count, decimal-leading-zero);
+    }
+    .works-list-head {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      color: var(--gray-900);
+      margin-bottom: 14px;
+    }
+    .works-list-body {
+      font-size: .93rem;
+      color: var(--gray-700);
+      line-height: 1.9;
+      max-width: 520px;
+      margin: 0 auto;
     }
 
     /* キャリア */
@@ -191,7 +224,7 @@
     .recruit-cta p  { max-width: 520px; margin: 0 auto 32px; color: var(--gray-700); }
 
     @media (max-width: 768px) {
-      .conditions-cards-4 { grid-template-columns: repeat(2, 1fr); }
+      .works-list-sec { padding: 32px 0; }
       .career-flow { flex-direction: column; gap: 8px; }
       .career-step { border-radius: var(--radius-md) !important; margin-left: 0 !important; }
       .career-arrow { transform: rotate(90deg); padding: 0; }
@@ -360,30 +393,30 @@
         <h2 class="section-title fade-up">磐田市での働き方・待遇</h2>
         <p class="section-sub fade-up">隊員が安心して活動できるよう、市がサポートします</p>
 
-        <div class="conditions-cards-4">
+        <div class="works-list">
 
-          <div class="appeal-card fade-up">
-            <div class="appeal-icon">📋</div>
-            <div class="appeal-title">雇用関係は委嘱契約で副業可能</div>
-            <div class="appeal-desc">磐田市では委嘱契約により任用するため雇用関係はありません。公序良俗に反せず活動に支障がない範囲で副業も認められます。</div>
+          <div class="works-list-sec fade-up">
+            <span class="works-list-num"></span>
+            <h3 class="works-list-head">雇用関係は委嘱契約で副業可能</h3>
+            <p class="works-list-body">磐田市では委嘱契約により任用するため雇用関係はありません。公序良俗に反せず活動に支障がない範囲で副業も認められます。</p>
           </div>
 
-          <div class="appeal-card fade-up">
-            <div class="appeal-icon">🏠</div>
-            <div class="appeal-title">住民票を移動できることが条件</div>
-            <div class="appeal-desc">三大都市圏など都市地域から過疎地域等へ移住することが前提です。すでに磐田市に住民票がある方は対象外となります。</div>
+          <div class="works-list-sec fade-up">
+            <span class="works-list-num"></span>
+            <h3 class="works-list-head">住民票を移動できることが条件</h3>
+            <p class="works-list-body">三大都市圏など都市地域から過疎地域等へ移住することが前提です。すでに磐田市に住民票がある方は対象外となります。</p>
           </div>
 
-          <div class="appeal-card fade-up">
-            <div class="appeal-icon">📍</div>
-            <div class="appeal-title">磐田市内に住民票を移動できることが条件</div>
-            <div class="appeal-desc">任期中は磐田市内に居住し、住民票を移すことが必要です。活動拠点として磐田に根ざした暮らしを送っていただきます。</div>
+          <div class="works-list-sec fade-up">
+            <span class="works-list-num"></span>
+            <h3 class="works-list-head">磐田市内に住民票を移動できることが条件</h3>
+            <p class="works-list-body">任期中は磐田市内に居住し、住民票を移すことが必要です。活動拠点として磐田に根ざした暮らしを送っていただきます。</p>
           </div>
 
-          <div class="appeal-card fade-up">
-            <div class="appeal-icon">💰</div>
-            <div class="appeal-title">家賃補助や起業支援補助金もあり</div>
-            <div class="appeal-desc">家賃は月額5万円まで活動費補助から支援。任期後の起業・独立に向けた支援補助金など、充実したサポート体制があります。</div>
+          <div class="works-list-sec fade-up">
+            <span class="works-list-num"></span>
+            <h3 class="works-list-head">家賃補助や起業支援補助金もあり</h3>
+            <p class="works-list-body">家賃は月額5万円まで活動費補助から支援。任期後の起業・独立に向けた支援補助金など、充実したサポート体制があります。</p>
           </div>
 
         </div>
