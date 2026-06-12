@@ -139,7 +139,7 @@ p  { font-size: clamp(.9rem, 1.5vw, 1rem); color: var(--gray-700); }
 .nav-cta {
   background: var(--blue);
   color: var(--white) !important;
-  padding: 8px 20px;
+  padding: 8px 20px !important;
   border-radius: 100px;
   font-size: .875rem !important;
   font-weight: 600 !important;
