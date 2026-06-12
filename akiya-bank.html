@@ -10,19 +10,63 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
-    .map-svg-wrap { margin-bottom: 8px; }
     .area-path { cursor: pointer; transition: opacity .15s; stroke: #fff; stroke-width: 2; }
     .area-path:hover { opacity: .82; }
     .area-path.active { stroke: var(--blue); stroke-width: 3; filter: drop-shadow(0 0 6px rgba(91,155,213,.4)); }
-    .map-chip-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
-    .map-chip {
-      padding: 5px 14px; border-radius: 100px; font-size: .8rem; font-weight: 600;
-      border: 1.5px solid var(--gray-300); color: var(--gray-700); cursor: pointer;
-      background: var(--white); transition: all var(--transition); font-family: 'Noto Sans JP', sans-serif;
+
+    /* 地図 + ボタン 左右レイアウト */
+    .map-area-layout {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      margin-bottom: 8px;
     }
-    .map-chip:hover { border-color: var(--blue); color: var(--blue); }
-    .map-chip.active { background: var(--blue); border-color: var(--blue); color: var(--white); }
-    .map-chip.all-chip.active { background: var(--gray-900); border-color: var(--gray-900); color: var(--white); }
+    .map-svg-wrap { flex-shrink: 0; }
+    .map-area-buttons {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .area-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--gray-200);
+      background: var(--white);
+      cursor: pointer;
+      font-size: .88rem;
+      font-weight: 600;
+      color: var(--gray-700);
+      transition: all var(--transition);
+      font-family: 'Noto Sans JP', sans-serif;
+      text-align: left;
+      width: 100%;
+    }
+    .area-btn-swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      flex-shrink: 0;
+      border: 1px solid rgba(0,0,0,.08);
+    }
+    .area-btn:hover { border-color: var(--blue); color: var(--blue-dark); }
+    .area-btn.active {
+      background: var(--blue-light);
+      border-color: var(--blue);
+      color: var(--blue-dark);
+    }
+    .area-btn.all-btn.active {
+      background: var(--gray-900);
+      border-color: var(--gray-900);
+      color: var(--white);
+    }
+    @media (max-width: 600px) {
+      .map-area-layout { flex-direction: column; align-items: stretch; }
+      .map-svg-wrap { text-align: center; }
+    }
 
     .search-box {
       background: var(--gray-50);
@@ -205,42 +249,62 @@
         <!-- 検索ボックス -->
         <div class="search-box fade-up">
 
-          <!-- エリアから探す（SVG地図） -->
+          <!-- エリアから探す（SVG地図 + ボタン） -->
           <div class="search-section-title">エリアから探す</div>
-          <div class="map-svg-wrap">
-            <svg id="mapSvg" viewBox="0 0 246 504" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:180px;display:block;margin:0 auto">
-              <path id="map-toyooka" class="area-path" fill="#C0DD97"
-                d="M220.5 14L246 0L220.5 31L213 42.5L189 70L196.5 89.5L178 106.5L160.5 146.5L134.5 154L124.5 169.5L109.5 205.5L81 195.5V169.5L89 128.5L98 119.5V82.5L89 58.5L134.5 35.5H146L153.5 20L220.5 14Z"
-                onclick="selectMapArea('toyooka')" />
-              <text style="font-size:14px;font-weight:600;fill:#27500A;pointer-events:none;font-family:sans-serif" x="150" y="110" text-anchor="middle">豊岡</text>
-              <path id="map-iwata" class="area-path" fill="#CECBF6"
-                d="M147.5 228.5L130.5 173.5L112 212L84.5 203L73.5 224.5L68 269H92.5L112 267L120 297.5L102 336.5L89 333L92.5 346L89 357.5L94.5 385.5H81L73.5 375.5L49.5 378V427.5L55.5 434.5L66 431.5L94.5 482.5L112 479L120 413.5H174.5L183 422L185 413.5L204 364L198 302H187V245.5L147.5 228.5Z"
-                onclick="selectMapArea('iwata')" />
-              <text style="font-size:14px;font-weight:600;fill:#3C3489;pointer-events:none;font-family:sans-serif" x="148" y="310" text-anchor="middle">磐田</text>
-              <path id="map-toyota" class="area-path" fill="#B5D4F4"
-                d="M33.5 320.5L67 270.5H90.5L111 268.5L119 297L101 334.5L87 331.5L90.5 345.5L87 357L90.5 383.5H82L74 373.5L51.5 377L22.5 368L33.5 320.5Z"
-                onclick="selectMapArea('toyota')" />
-              <text style="font-size:14px;font-weight:600;fill:#0C447C;pointer-events:none;font-family:sans-serif" x="72" y="330" text-anchor="middle">豊田</text>
-              <path id="map-ryuyo" class="area-path" fill="#FAC775"
-                d="M0 458L22 369.5L47 377.5V428L54 436L65 432.5L71 444L92 484L71 487L42.5 494.5L6.5 503.5L0 458Z"
-                onclick="selectMapArea('ryuyo')" />
-              <text style="font-size:14px;font-weight:600;fill:#633806;pointer-events:none;font-family:sans-serif" x="42" y="460" text-anchor="middle">竜洋</text>
-              <path id="map-fukuda" class="area-path" fill="#F5C4B3"
-                d="M122 415L113 479.5L209.5 470.5L204 440.5L214 436.5L209.5 424.5L188 418L183.5 424.5L173.5 415H122Z"
-                onclick="selectMapArea('fukuda')" />
-              <text style="font-size:14px;font-weight:600;fill:#993C1D;pointer-events:none;font-family:sans-serif" x="165" y="450" text-anchor="middle">福田</text>
-              <text style="font-size:11px;fill:#868E96;font-family:sans-serif" x="20" y="18" text-anchor="middle">N</text>
-              <line x1="20" y1="22" x2="20" y2="34" stroke="#868E96" stroke-width="1"/>
-              <polygon points="20,22 17,32 23,32" fill="#868E96"/>
-            </svg>
-          </div>
-          <div class="map-chip-row" id="mapChips">
-            <button class="map-chip all-chip active" onclick="selectMapArea('all')">すべて</button>
-            <button class="map-chip" id="mchip-toyooka" onclick="selectMapArea('toyooka')">豊岡</button>
-            <button class="map-chip" id="mchip-toyota" onclick="selectMapArea('toyota')">豊田</button>
-            <button class="map-chip" id="mchip-iwata" onclick="selectMapArea('iwata')">磐田</button>
-            <button class="map-chip" id="mchip-ryuyo" onclick="selectMapArea('ryuyo')">竜洋</button>
-            <button class="map-chip" id="mchip-fukuda" onclick="selectMapArea('fukuda')">福田</button>
+          <div class="map-area-layout">
+            <div class="map-svg-wrap">
+              <svg id="mapSvg" viewBox="0 0 246 504" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:260px;display:block;">
+                <path id="map-toyooka" class="area-path" fill="#C0DD97"
+                  d="M220.5 14L246 0L220.5 31L213 42.5L189 70L196.5 89.5L178 106.5L160.5 146.5L134.5 154L124.5 169.5L109.5 205.5L81 195.5V169.5L89 128.5L98 119.5V82.5L89 58.5L134.5 35.5H146L153.5 20L220.5 14Z"
+                  onclick="selectMapArea('toyooka')" />
+                <text style="font-size:14px;font-weight:600;fill:#27500A;pointer-events:none;font-family:sans-serif" x="150" y="110" text-anchor="middle">豊岡</text>
+                <path id="map-iwata" class="area-path" fill="#CECBF6"
+                  d="M147.5 228.5L130.5 173.5L112 212L84.5 203L73.5 224.5L68 269H92.5L112 267L120 297.5L102 336.5L89 333L92.5 346L89 357.5L94.5 385.5H81L73.5 375.5L49.5 378V427.5L55.5 434.5L66 431.5L94.5 482.5L112 479L120 413.5H174.5L183 422L185 413.5L204 364L198 302H187V245.5L147.5 228.5Z"
+                  onclick="selectMapArea('iwata')" />
+                <text style="font-size:14px;font-weight:600;fill:#3C3489;pointer-events:none;font-family:sans-serif" x="148" y="310" text-anchor="middle">磐田</text>
+                <path id="map-toyota" class="area-path" fill="#B5D4F4"
+                  d="M33.5 320.5L67 270.5H90.5L111 268.5L119 297L101 334.5L87 331.5L90.5 345.5L87 357L90.5 383.5H82L74 373.5L51.5 377L22.5 368L33.5 320.5Z"
+                  onclick="selectMapArea('toyota')" />
+                <text style="font-size:14px;font-weight:600;fill:#0C447C;pointer-events:none;font-family:sans-serif" x="72" y="330" text-anchor="middle">豊田</text>
+                <path id="map-ryuyo" class="area-path" fill="#FAC775"
+                  d="M0 458L22 369.5L47 377.5V428L54 436L65 432.5L71 444L92 484L71 487L42.5 494.5L6.5 503.5L0 458Z"
+                  onclick="selectMapArea('ryuyo')" />
+                <text style="font-size:14px;font-weight:600;fill:#633806;pointer-events:none;font-family:sans-serif" x="42" y="460" text-anchor="middle">竜洋</text>
+                <path id="map-fukuda" class="area-path" fill="#F5C4B3"
+                  d="M122 415L113 479.5L209.5 470.5L204 440.5L214 436.5L209.5 424.5L188 418L183.5 424.5L173.5 415H122Z"
+                  onclick="selectMapArea('fukuda')" />
+                <text style="font-size:14px;font-weight:600;fill:#993C1D;pointer-events:none;font-family:sans-serif" x="165" y="450" text-anchor="middle">福田</text>
+                <text style="font-size:11px;fill:#868E96;font-family:sans-serif" x="20" y="18" text-anchor="middle">N</text>
+                <line x1="20" y1="22" x2="20" y2="34" stroke="#868E96" stroke-width="1"/>
+                <polygon points="20,22 17,32 23,32" fill="#868E96"/>
+              </svg>
+            </div>
+            <div class="map-area-buttons">
+              <button class="area-btn all-btn active" onclick="selectMapArea('all')">
+                <span class="area-btn-swatch" style="background:var(--gray-300);"></span>
+                すべてのエリア
+              </button>
+              <button class="area-btn" id="abtn-toyooka" onclick="selectMapArea('toyooka')">
+                <span class="area-btn-swatch" style="background:#C0DD97;"></span>
+                豊岡
+              </button>
+              <button class="area-btn" id="abtn-iwata" onclick="selectMapArea('iwata')">
+                <span class="area-btn-swatch" style="background:#CECBF6;"></span>
+                磐田
+              </button>
+              <button class="area-btn" id="abtn-toyota" onclick="selectMapArea('toyota')">
+                <span class="area-btn-swatch" style="background:#B5D4F4;"></span>
+                豊田
+              </button>
+              <button class="area-btn" id="abtn-ryuyo" onclick="selectMapArea('ryuyo')">
+                <span class="area-btn-swatch" style="background:#FAC775;"></span>
+                竜洋
+              </button>
+              <button class="area-btn" id="abtn-fukuda" onclick="selectMapArea('fukuda')">
+                <span class="area-btn-swatch" style="background:#F5C4B3;"></span>
+                福田
+              </button>
+            </div>
           </div>
 
           <div class="search-divider">カテゴリから絞り込む</div>
@@ -574,14 +638,14 @@
     function selectMapArea(id) {
       currentArea = id;
       document.querySelectorAll('.area-path').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.map-chip').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.area-btn').forEach(c => c.classList.remove('active'));
       if (id !== 'all') {
         const path = document.getElementById('map-' + id);
         if (path) path.classList.add('active');
-        const chip = document.getElementById('mchip-' + id);
-        if (chip) chip.classList.add('active');
+        const btn = document.getElementById('abtn-' + id);
+        if (btn) btn.classList.add('active');
       } else {
-        document.querySelector('.map-chip.all-chip').classList.add('active');
+        document.querySelector('.area-btn.all-btn').classList.add('active');
       }
       applyFilters();
     }
