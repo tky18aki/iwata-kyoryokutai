@@ -172,7 +172,7 @@ p  { font-size: clamp(.9rem, 1.5vw, 1rem); color: var(--gray-700); }
 }
 .nav-dropdown-menu {
   position: absolute;
-  top: calc(100% + 16px);
+  top: 100%;
   left: 50%;
   transform: translateX(-50%) translateY(-6px);
   background: var(--white);
@@ -180,7 +180,7 @@ p  { font-size: clamp(.9rem, 1.5vw, 1rem); color: var(--gray-700); }
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--gray-100);
   min-width: 152px;
-  padding: 6px 0;
+  padding: 22px 0 6px;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
