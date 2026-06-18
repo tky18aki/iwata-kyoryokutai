@@ -268,6 +268,7 @@
       <div class="prop-header">
         <div class="prop-tags" id="detailTags"></div>
         <h1 id="detailTitle">物件詳細</h1>
+        <p id="detailCatch" style="color:var(--gray-500);font-size:.9rem;margin-bottom:6px;"></p>
         <div class="price" id="detailPrice"></div>
       </div>
 
@@ -388,29 +389,37 @@
     // 物件データ
     const properties = {
       'prop-01': {
-        title: '磐田市内　古民家戸建て',
-        price: '133万円',
+        title: '磐田市大平　平屋古民家（5DK）',
+        catch: '【秘密基地・隠れ家派へ】磐田の奥座敷、誰にも教えたくない『自分だけの聖域』がここに。',
+        price: '300万円',
         priceNote: '（税込）',
-        tags: [{ label: '売買', cls: 'tag' }, { label: '磐田', cls: 'tag-green tag' }, { label: '古民家', cls: 'tag' }],
+        photos: [
+          'images/akiya/prop-01/exterior-1.png',
+          'images/akiya/prop-01/exterior-2.png',
+          'images/akiya/prop-01/floorplan.png',
+        ],
+        tags: [{ label: '売買', cls: 'tag' }, { label: '豊岡', cls: 'tag-green tag' }, { label: '古民家', cls: 'tag' }, { label: '平屋', cls: 'tag' }],
         basic: [
-          { key: '物件種類', val: '戸建て（古民家）' },
-          { key: '所在地',   val: '静岡県磐田市内' },
-          { key: '間取り',   val: '調査中' },
-          { key: '建物面積', val: '調査中' },
-          { key: '土地面積', val: '調査中' },
-          { key: '築年月',   val: '調査中' },
-          { key: '建物構造', val: '木造' },
-          { key: '交通',     val: '調査中' },
+          { key: '物件種類', val: '戸建て（平屋・古民家）' },
+          { key: '所在地',   val: '静岡県磐田市大平788-1' },
+          { key: '間取り',   val: '5DK' },
+          { key: '建物面積', val: '120.32㎡' },
+          { key: '土地面積', val: '778.73㎡（公簿）' },
+          { key: '築年月',   val: '1985年2月' },
+          { key: '建物構造', val: '木造1階建' },
+          { key: '交通',     val: '天竜浜名湖鉄道「敷地駅」まで5,900m' },
         ],
         equip: [
-          { key: '水道',     val: '公営' },
-          { key: 'ガス',     val: '調査中' },
-          { key: '駐車場',   val: '調査中' },
+          { key: '水道',     val: '上水道' },
+          { key: 'ガス',     val: 'プロパンガス' },
+          { key: '駐車場',   val: '3台分以上（相談）' },
           { key: '現況',     val: '空き家' },
-          { key: '引き渡し', val: '要相談' },
-          { key: 'リフォーム', val: '調査中' },
+          { key: '引き渡し', val: '相談' },
+          { key: '設備',     val: '温水洗浄便座・照明器具・浄化槽・側溝' },
+          { key: '採光',     val: '主要採光面：南向き' },
+          { key: '備考',     val: '東側3.8m公道に接面26.5m、地勢は緩傾斜地。一部壁式RC造は契約不適合責任免責、売主による境界確定測量なし' },
         ],
-        contact: { name: '富士ヶ丘サービス株式会社', tel: 'TEL：0538-31-3308' },
+        contact: { name: '株式会社カワイ ICOI不動産事業部', tel: 'TEL：0539-62-9200', url: 'http://www.kk-kawai.com' },
       },
       'prop-02': {
         title: '磐田市内　中古戸建住宅',
@@ -603,8 +612,25 @@
 
     // タイトル・価格
     document.getElementById('detailTitle').textContent = prop.title;
+    document.getElementById('detailCatch').textContent = prop.catch || '';
     document.getElementById('detailPrice').innerHTML =
       prop.price + `<small>${prop.priceNote}</small>`;
+
+    // 写真
+    if (prop.photos && prop.photos.length) {
+      const photoMain = document.getElementById('photoMain');
+      const thumbsWrap = document.querySelector('.photo-thumbs');
+      const showMain = src => {
+        photoMain.innerHTML = `<img src="${src}" alt="${prop.title}">`;
+      };
+      showMain(prop.photos[0]);
+      thumbsWrap.innerHTML = prop.photos.map((src, i) =>
+        `<div class="photo-thumb" data-src="${src}"><img src="${src}" alt="${prop.title} 写真${i + 1}"></div>`
+      ).join('');
+      thumbsWrap.querySelectorAll('.photo-thumb').forEach(thumb => {
+        thumb.addEventListener('click', () => showMain(thumb.dataset.src));
+      });
+    }
 
     // 基本情報
     document.getElementById('specBasic').innerHTML = prop.basic.map(s =>
@@ -619,6 +645,15 @@
     // 問い合わせ先
     document.getElementById('contactName').textContent = prop.contact.name;
     document.getElementById('contactTel').textContent = prop.contact.tel;
+    if (prop.contact.url) {
+      const ctaBlock = document.querySelector('.cta-block');
+      const link = document.createElement('a');
+      link.href = prop.contact.url;
+      link.target = '_blank';
+      link.className = 'btn-ext';
+      link.innerHTML = `<span class="ext-icon">🏠</span>${prop.contact.name}のサイトを見る<span style="font-size:.75rem;margin-left:auto;color:var(--gray-400)">↗</span>`;
+      ctaBlock.appendChild(link);
+    }
   </script>
 
 </body>
