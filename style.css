@@ -110,6 +110,13 @@ p  { font-size: clamp(.9rem, 1.5vw, 1rem); color: var(--gray-700); }
   color: var(--gray-500);
   font-family: 'Noto Sans JP', sans-serif;
 }
+.site-logo .demo-badge {
+  font-size: .65rem;
+  font-weight: 400;
+  color: var(--gray-400);
+  font-family: 'Noto Sans JP', sans-serif;
+  margin-left: 4px;
+}
 
 .nav-links {
   display: flex;
