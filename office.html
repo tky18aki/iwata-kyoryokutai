@@ -103,6 +103,76 @@
       flex-shrink: 0;
       margin-top: 1px;
     }
+    .office-photo {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+    }
+    .office-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding: 0 32px 32px;
+    }
+    .office-gallery img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+      background: var(--gray-50);
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .feature-item {
+      background: var(--white);
+      border: 1px solid var(--gray-100);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      text-align: center;
+      font-weight: 700;
+      color: var(--gray-700);
+      font-size: .92rem;
+    }
+    .feature-note {
+      margin-top: 16px;
+      font-size: .88rem;
+      color: var(--gray-600);
+      line-height: 1.8;
+    }
+    .schedule-grid {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: 1fr 1fr;
+      margin-bottom: 32px;
+    }
+    .schedule-card {
+      background: var(--gray-50);
+      border-radius: var(--radius-md);
+      padding: 24px 28px;
+      border-left: 4px solid var(--blue);
+    }
+    .schedule-title {
+      font-weight: 700;
+      font-size: .85rem;
+      color: var(--blue-dark);
+      margin-bottom: 8px;
+    }
+    .schedule-main {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 6px;
+    }
+    .schedule-sub {
+      font-size: .85rem;
+      color: var(--gray-600);
+      line-height: 1.7;
+    }
   </style>
 </head>
 <body>
@@ -166,8 +236,8 @@
           <span>›</span>
           <span>協力隊拠点</span>
         </nav>
-        <h1 class="fade-up">協力隊拠点</h1>
-        <p class="fade-up">地域おこし協力隊の活動拠点をご紹介します。お気軽にお立ち寄りください。</p>
+        <h1 class="fade-up">協力隊拠点｜IWATA BASE</h1>
+        <p class="fade-up">まちが動き出すきっかけが生まれる場所。地域交流拠点「IWATA BASE」が磐田に誕生します。</p>
       </div>
     </div>
 
@@ -175,37 +245,83 @@
     <section class="section">
       <div class="container">
         <h2 class="section-title fade-up">活動拠点のご案内</h2>
-        <p class="section-sub fade-up">移住相談や空き家情報のご案内も行っています</p>
+        <p class="section-sub fade-up">出会う、つながる、相談する、挑戦する。ここは、人と人、想いと想いがつながり、新しい一歩が生まれる"まちのハブ"です。</p>
 
         <div class="office-card fade-up">
-          <div class="office-img-placeholder">🏢</div>
-          <div class="office-body">
-            <div class="office-tag">メイン拠点</div>
-            <div class="office-name">磐田市 地域おこし協力隊 活動拠点</div>
+          <img class="office-photo" src="images/office/building.png" alt="IWATA BASE 外観">
+          <div class="office-gallery">
+            <img src="images/office/exterior-sign.png" alt="IWATA BASE 看板">
+            <img src="images/office/interior.png" alt="IWATA BASE 店内の様子">
+            <img src="images/office/layout.png" alt="IWATA BASE レイアウト図">
+          </div>
+          <div class="office-body" style="padding-top: 0;">
+            <div class="office-tag">地域交流拠点</div>
+            <div class="office-name">IWATA BASE（磐田ベース）</div>
             <div class="office-info-list">
               <div class="office-info-row">
                 <span class="office-info-label">所在地</span>
-                <span class="office-info-value">〒438-0078<br>静岡県磐田市中泉112-1</span>
+                <span class="office-info-value">静岡県磐田市国府台6-7</span>
               </div>
               <div class="office-info-row">
-                <span class="office-info-label">開所時間</span>
-                <span class="office-info-value">平日 9:00 〜 17:00</span>
-              </div>
-              <div class="office-info-row">
-                <span class="office-info-label">休業日</span>
-                <span class="office-info-value">土・日・祝日、年末年始</span>
+                <span class="office-info-label">開館</span>
+                <span class="office-info-value">プレオープン期間：2026年6月15日（月）〜7月16日（木）<br>グランドオープン：2026年7月17日（金）12:00 OPEN<br>※開館日・営業時間はスタッフが在籍している時間のみ。詳細はInstagramでお知らせします。</span>
               </div>
               <div class="office-info-row">
                 <span class="office-info-label">電話</span>
-                <span class="office-info-value">0538-37-4851（磐田市建築住宅課）</span>
+                <span class="office-info-value">080-4849-5929（担当：藤田）</span>
               </div>
               <div class="office-info-row">
                 <span class="office-info-label">メール</span>
-                <span class="office-info-value">kenchiku-jutaku@city.iwata.lg.jp</span>
+                <span class="office-info-value">iwata.chioko1@gmail.com（担当：藤田）</span>
+              </div>
+              <div class="office-info-row">
+                <span class="office-info-label">Instagram</span>
+                <span class="office-info-value"><a href="https://www.instagram.com/iwata_chiikiokoshi/" target="_blank">@iwata_chiikiokoshi</a>（営業日・イベント情報を発信中）</span>
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- オープンスケジュール -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <h2 class="section-title fade-up">オープンスケジュール</h2>
+        <p class="section-sub fade-up">プレオープン期間は、皆さんの声をもとにより良い場所をつくっていく期間です</p>
+
+        <div class="schedule-grid fade-up">
+          <div class="schedule-card">
+            <div class="schedule-title">PRE OPEN</div>
+            <div class="schedule-main">6/15（月）〜 7/16（木）</div>
+            <div class="schedule-sub">
+              第1期：6月15日（月）〜6月30日（火）9:00〜21:00<br>
+              利用料金：500円（ドリンク1杯・お菓子3個・フリータイム利用・電源/WiFi利用込み）<br>
+              追加注文：2杯目以降300円（お菓子は別売り）
+            </div>
+          </div>
+          <div class="schedule-card" style="border-left-color: var(--green, #2e8b57);">
+            <div class="schedule-title">GRAND OPEN</div>
+            <div class="schedule-main">7/17（金）12:00 OPEN</div>
+            <div class="schedule-sub">
+              OPEN PARTY 開催：7月17日（金）12:00〜20:00<br>
+              チャレンジカフェ出展者によるドリンク・お菓子の販売、企画展「これからの企画」を実施。どなたでもご参加いただけます。
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-grid fade-up">
+          <div class="feature-item">☕ コワーキング</div>
+          <div class="feature-item">📖 勉強・読書</div>
+          <div class="feature-item">💻 オンライン会議</div>
+          <div class="feature-item">🤝 打ち合わせ</div>
+          <div class="feature-item">💬 交流・相談</div>
+          <div class="feature-item">💡 アイデア出し</div>
+        </div>
+        <p class="feature-note fade-up">
+          ・電源、WiFi利用OK！　・飲食持ち込みOK！　・ドリンク&お菓子付き！<br>
+          プレオープン期間中はリノベーション会、試飲・試食会、交流会（ボドゲ・ゲーム）、パブリックビューイングなどのイベントも予定しています（内容・日程はInstagramでお知らせします）。
+        </p>
       </div>
     </section>
 
@@ -221,20 +337,20 @@
               <div class="access-title">交通アクセス</div>
               <div class="access-list">
                 <div class="access-item">
-                  <span class="access-icon">🚃</span>
-                  <span>JR東海道本線「磐田駅」より徒歩約10分</span>
-                </div>
-                <div class="access-item">
-                  <span class="access-icon">🚌</span>
-                  <span>遠鉄バス「市役所前」バス停より徒歩約3分</span>
+                  <span class="access-icon">📍</span>
+                  <span>静岡県磐田市国府台6-7（磐田市役所のすぐ近くです）</span>
                 </div>
                 <div class="access-item">
                   <span class="access-icon">🚗</span>
-                  <span>東名高速「磐田IC」より約15分</span>
+                  <span>お車でのご来館も可能です</span>
                 </div>
                 <div class="access-item">
                   <span class="access-icon">🅿️</span>
-                  <span>市役所駐車場をご利用ください（無料）</span>
+                  <span>駐車場の有無・台数はInstagramでご確認ください</span>
+                </div>
+                <div class="access-item">
+                  <span class="access-icon">📸</span>
+                  <span>最新のアクセス情報は<a href="https://www.instagram.com/iwata_chiikiokoshi/" target="_blank">Instagram（@iwata_chiikiokoshi）</a>でご案内しています</span>
                 </div>
               </div>
             </div>
@@ -242,7 +358,7 @@
           <div>
             <iframe
               class="map-frame"
-              src="https://maps.google.com/maps?q=静岡県磐田市中泉112-1&output=embed&hl=ja"
+              src="https://maps.google.com/maps?q=静岡県磐田市国府台6-7&output=embed&hl=ja"
               allowfullscreen
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
